@@ -24,3 +24,83 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+.amenity-card {
+  position: relative;
+  height: 240px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #6D1B1C, #8B2A2B);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  overflow: hidden;
+}
+
+/* subtle white texture */
+.amenity-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(214, 42, 42, 0.15), transparent 60%);
+}
+
+/* hover effect */
+.amenity-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* IMAGE CONTAINER — CONTROLS SIZE */
+.amenity-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  z-index: 1;
+}
+
+/* IMAGE — FILLS THE BOX */
+.amenity-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* IMPORTANT */
+}
+
+/* TITLE */
+.amenity-card h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  z-index: 1;
+  text-align: center;
+}
+.amenity-card {
+  position: relative;
+  height: 220px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #6D1B1C, #8B2A2B);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+}
+
+/* Leaf / texture overlay */
+.amenity-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/images/leafs.jpeg"); /* your leaf texture */
+  background-size: cover;
+  background-position: center;
+  opacity: 0.12;          /* subtle like your screenshot */
+  z-index: 0;
+}
+
+/* Content stays above pattern */
+.amenity-content {
+  position: relative;
+  z-index: 1;
+}
