@@ -31,25 +31,23 @@ export default function LuxuryPenthouse() {
   return (
     <section className="max-w-6xl mx-auto px-6 mt-16 mb-20">
 
-      {/* PROPERTY HEADER */}
+      {/* header */}
       <div className="bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
-          {/* LEFT: IMAGE */}
+          {/* image */}
           <div>
             <img
               src="/images/luxury_penthouse.jpeg"
               alt="Luxury Penthouse"
-              className="w-full h-[350px] object-cover rounded-xl shadow-md"
-            />
+              className="w-full h-[350px] object-cover rounded-xl shadow-md" />
           </div>
 
-          {/* RIGHT: DETAILS */}
+          {/* details */}
           <div>
             <h2
               className="text-3xl font-bold text-[#6D1B1C] mb-2"
-              style={{ fontFamily: "'Sanchez', serif" }}
-            >
+              style={{ fontFamily: "'Sanchez', serif" }}>
               Luxury Penthouse
             </h2>
 
@@ -61,7 +59,7 @@ export default function LuxuryPenthouse() {
               ₹3.2 Crore
             </p>
 
-            {/* KEY HIGHLIGHTS */}
+            {/* highlights */}
             <div className="grid grid-cols-2 gap-4 text-[#1F3A2E] mb-6">
               <p className="flex items-center gap-2">
                 <FaBed /> 4 BHK Penthouse
@@ -83,7 +81,7 @@ export default function LuxuryPenthouse() {
               </p>
             </div>
 
-            {/* ACTION BUTTONS */}
+            {/* buttons */}
             <div className="mt-6 space-y-4">
               <button className="flex items-center gap-2 bg-[#6D1B1C] text-white px-6 py-2 rounded-md hover:bg-[#541516] transition">
                 <FaPhoneAlt /> Request Owner Number
@@ -93,16 +91,14 @@ export default function LuxuryPenthouse() {
                 <button
                   onClick={() => window.history.back()}
                   className="flex items-center gap-2 bg-white border border-[#B8A47C] text-[#6D1B1C]
-                             px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition"
-                >
+                             px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition">
                   <FaArrowLeft /> Go Back
                 </button>
 
                 <Link
-                  href="/"
+                  href="/home-user-subscribed"
                   className="flex items-center gap-2 bg-white border border-[#B8A47C] text-[#6D1B1C]
-                             px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition"
-                >
+                             px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition">
                   <FaHome /> Home
                 </Link>
               </div>
@@ -111,7 +107,7 @@ export default function LuxuryPenthouse() {
         </div>
       </div>
 
-      {/* PROPERTY OVERVIEW */}
+      {/* overview */}
       <div className="mt-12 bg-white border border-[#B8A47C] rounded-xl p-10 shadow-sm">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Property Overview
@@ -125,7 +121,7 @@ export default function LuxuryPenthouse() {
         </p>
       </div>
 
-      {/* PROPERTY SPECIFICATIONS */}
+      {/* specifications */}
       <div className="mt-12 bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Property Specifications
@@ -143,7 +139,7 @@ export default function LuxuryPenthouse() {
         </div>
       </div>
 
-      {/* LUXURY AMENITIES */}
+      {/* amenities */}
       <div className="mt-12 bg-white border border-[#B8A47C] rounded-xl p-10 shadow-sm">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Premium Amenities
@@ -161,7 +157,7 @@ export default function LuxuryPenthouse() {
         </div>
       </div>
 
-      {/* CONNECTIVITY & METRO */}
+      {/* nearby connectivity */}
       <div className="mt-12 bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Connectivity & Metro Access
@@ -175,7 +171,7 @@ export default function LuxuryPenthouse() {
         </div>
       </div>
 
-      {/* WHY THIS PENTHOUSE IS SPECIAL */}
+      {/* questioning part */}
       <div className="mt-12 bg-white border border-[#B8A47C] rounded-xl p-10 shadow-sm">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Why Choose This Penthouse?
@@ -191,7 +187,7 @@ export default function LuxuryPenthouse() {
         </ul>
       </div>
 
-      {/* MESSAGE TO OWNER */}
+      {/* message to owner section */}
       <div className="mt-12 bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4 text-center">
           Message to Owner
@@ -207,16 +203,14 @@ export default function LuxuryPenthouse() {
 
         <div className="flex gap-4 mt-4">
           <button
-            className="flex items-center gap-2 bg-[#6D1B1C] text-white px-8 py-2 rounded-md hover:bg-[#541516] transition"
-          >
+            className="flex items-center gap-2 bg-[#6D1B1C] text-white px-8 py-2 rounded-md hover:bg-[#541516] transition">
             <FaPaperPlane /> Send Message
           </button>
 
           <button
             onClick={() => setMessage("")}
             className="flex items-center gap-2 bg-white border border-[#B8A47C] text-[#6D1B1C]
-                       px-6 py-2 rounded-md hover:bg-[#F4E9D8] transition"
-          >
+                       px-6 py-2 rounded-md hover:bg-[#F4E9D8] transition">
             <FaEraser /> Clear Message
           </button>
         </div>

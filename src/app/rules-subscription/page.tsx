@@ -84,7 +84,7 @@ export default function RulesAndSubscription() {
           <FaUser className="text-4xl text-[#6D1B1C] mx-auto mb-3" />
           <h3 className="text-xl font-semibold text-[#6D1B1C] mb-2">User Plan</h3>
           <p className="text-[#1F3A2E] mb-3">Best for buyers & renters</p>
-          <p className="text-2xl font-bold text-[#6D1B1C] mb-4">₹499 / month</p>
+          <p className="text-2xl font-bold text-[#6D1B1C] mb-4">₹999 / month</p>
 
           <ul className="text-[#1F3A2E] text-sm space-y-2 mb-6">
             <li>✔ View all details</li>
@@ -94,7 +94,7 @@ export default function RulesAndSubscription() {
           </ul>
 
           <Link
-            href="/subscribe/user"
+            href="/subscribe-user"
             className="inline-block bg-[#6D1B1C] text-white px-6 py-2 rounded-md hover:bg-[#541516]">
             Subscribe Now
           </Link>
@@ -149,8 +149,7 @@ export default function RulesAndSubscription() {
       <div className="mt-12 flex justify-center gap-6">
         <Link
           href="/"
-          className="bg-[#6D1B1C] border border-[#B8A47C] text-white px-6 py-2 rounded-md hover:bg-[#F4E9D8]"
-        >
+          className="bg-[#6D1B1C] border border-[#B8A47C] text-white px-6 py-2 rounded-md hover:bg-[#F4E9D8]">
           ← Back to Home
         </Link>
       </div>

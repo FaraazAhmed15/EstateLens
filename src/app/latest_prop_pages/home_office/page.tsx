@@ -28,20 +28,19 @@ export default function CommercialOfficeSpace() {
   return (
     <section className="max-w-6xl mx-auto px-6 mt-16 mb-20">
 
-      {/* PROPERTY HEADER */}
+      {/* header */}
       <div className="bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
-          {/* LEFT: IMAGE */}
+          {/* image */}
           <div>
             <img
               src="/images/home_card2.jpeg"
               alt="Commercial Office Space Whitefield"
-              className="w-full h-[360px] object-cover rounded-xl shadow-md"
-            />
+              className="w-full h-[360px] object-cover rounded-xl shadow-md"/>
           </div>
 
-          {/* RIGHT: DETAILS */}
+          {/* details */}
           <div>
             <h2
               className="text-3xl font-bold text-[#6D1B1C] mb-2"
@@ -58,7 +57,7 @@ export default function CommercialOfficeSpace() {
               ₹9.4 Crore
             </p>
 
-            {/* PROPERTY HIGHLIGHTS */}
+            {/* highlights */}
             <div className="grid grid-cols-2 gap-4 text-[#1F3A2E] mb-6">
               <p className="flex items-center gap-2">
                 <FaBuilding /> Grade A IT Park
@@ -77,7 +76,7 @@ export default function CommercialOfficeSpace() {
               </p>
             </div>
 
-            {/* ACTION BUTTONS */}
+            {/* buttons */}
             <div className="mt-6 space-y-4">
               <button className="flex items-center gap-2 bg-[#6D1B1C] text-white px-6 py-2 rounded-md hover:bg-[#541516] transition">
                 <FaPhoneAlt /> Request Owner Number
@@ -93,7 +92,7 @@ export default function CommercialOfficeSpace() {
                 </button>
 
                 <Link
-                  href="/"
+                  href="/home-user-subscribed"
                   className="flex items-center gap-2 bg-white border border-[#B8A47C] text-[#6D1B1C]
                              px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition"
                 >
@@ -105,7 +104,7 @@ export default function CommercialOfficeSpace() {
         </div>
       </div>
 
-      {/* PROPERTY SPECIFICATIONS */}
+      {/* specifications */}
       <div className="mt-12 bg-white border border-[#B8A47C] rounded-xl p-10 shadow-sm">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Property Specifications
@@ -123,7 +122,7 @@ export default function CommercialOfficeSpace() {
         </div>
       </div>
 
-      {/* AMENITIES */}
+      {/* amenities */}
       <div className="mt-12 bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Amenities
@@ -139,7 +138,7 @@ export default function CommercialOfficeSpace() {
         </div>
       </div>
 
-      {/* NEARBY LANDMARKS */}
+      {/* landmarks */}
       <div className="mt-12 bg-white border border-[#B8A47C] rounded-xl p-10 shadow-sm">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Nearby Landmarks
@@ -152,7 +151,7 @@ export default function CommercialOfficeSpace() {
         </div>
       </div>
 
-      {/* WHY INVEST IN THIS OFFICE SPACE */}
+      {/* questioning part */}
       <div className="mt-12 bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Why Invest in This Office Space?
@@ -167,7 +166,7 @@ export default function CommercialOfficeSpace() {
         </ul>
       </div>
 
-      {/* MESSAGE TO OWNER */}
+      {/* message to owner section*/}
       <div className="mt-12 bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4 text-center">
           Message to Owner
@@ -178,21 +177,18 @@ export default function CommercialOfficeSpace() {
           placeholder="Write your message to the property owner..."
           className="w-full border border-[#B8A47C] rounded-md px-4 py-2 focus:outline-none"
           value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
+          onChange={(e) => setMessage(e.target.value)}/>
 
         <div className="flex gap-4 mt-4">
           <button
-            className="flex items-center gap-2 bg-[#6D1B1C] text-white px-8 py-2 rounded-md hover:bg-[#541516] transition"
-          >
+            className="flex items-center gap-2 bg-[#6D1B1C] text-white px-8 py-2 rounded-md hover:bg-[#541516] transition">
             <FaPaperPlane /> Send Message
           </button>
 
                     <button
             onClick={() => setMessage("")}
             className="flex items-center gap-2 bg-white border border-[#B8A47C] text-[#6D1B1C]
-                       px-6 py-2 rounded-md hover:bg-[#F4E9D8] transition"
-          >
+                       px-6 py-2 rounded-md hover:bg-[#F4E9D8] transition">
             <FaEraser /> Clear Message
           </button>
         </div>

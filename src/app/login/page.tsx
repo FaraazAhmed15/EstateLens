@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 
-export default function SignupPage() {
+export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -14,25 +14,15 @@ export default function SignupPage() {
         {/* HEADER */}
         <header className="text-center">
           <h1 className="text-2xl sm:text-3xl font-bold text-[#6D1B1C]">
-            Create an Account
+            Welcome Back
           </h1>
           <p className="text-gray-600 mt-2 text-sm">
-            Sign up to get started
+            Sign in to access your dashboard
           </p>
         </header>
 
-        {/* SIGNUP FORM */}
+        {/* LOGIN FORM */}
         <form className="mt-6 space-y-5">
-          {/* NAME FIELD */}
-          <div>
-            <label className="block text-sm text-gray-700 mb-1">Full Name</label>
-            <input
-              type="text"
-              placeholder="John Doe"
-              className="w-full px-4 py-3 rounded-lg bg-[#FDF4E2] border border-gray-300 focus:border-[#6D1B1C] outline-none text-[#6D1B1C] text-sm"
-            />
-          </div>
-
           {/* EMAIL FIELD */}
           <div>
             <label className="block text-sm text-gray-700 mb-1">Email Address</label>
@@ -43,7 +33,7 @@ export default function SignupPage() {
             />
           </div>
 
-          {/* PASSWORD FIELD */}
+         {/* PASSWORD FIELD */}
 <div>
   <label className="block text-sm text-gray-700 mb-1">Password</label>
 
@@ -65,12 +55,12 @@ export default function SignupPage() {
   </div>
 </div>
 
-          {/* SIGNUP BUTTON */}
+          {/* LOGIN BUTTON */}
           <button
             type="submit"
             className="w-full mt-4 px-6 py-3 rounded-lg bg-[#6D1B1C] hover:bg-[#5a1617] transition text-sm font-semibold text-white"
           >
-            Sign Up
+            Sign In
           </button>
         </form>
 
@@ -81,10 +71,10 @@ export default function SignupPage() {
           <div className="flex-1 h-px bg-gray-300"></div>
         </div>
 
-        {/* LOGIN LINK */}
-        <Link href="/login" className="block">
+        {/* SIGNUP LINK */}
+        <Link href="/sign_up" className="block">
           <button className="w-full px-6 py-3 rounded-lg border border-[#6D1B1C]/40 hover:bg-[#6D1B1C]/10 transition text-sm text-[#6D1B1C]">
-            Already have an account? Log In
+            Create an Account
           </button>
         </Link>
       </div>

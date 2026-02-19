@@ -23,11 +23,11 @@ export default function AffordableApartment() {
   return (
     <section className="max-w-6xl mx-auto px-6 mt-16 mb-20">
 
-      {/* PROPERTY HEADER */}
+      {/* header */}
       <div className="bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
-          {/* LEFT: IMAGE */}
+          {/* image */}
           <div>
             <img
               src="/images/luxury.jpeg"
@@ -36,7 +36,7 @@ export default function AffordableApartment() {
             />
           </div>
 
-          {/* RIGHT: DETAILS */}
+          {/* details */}
           <div>
             <h2
               className="text-3xl font-bold text-[#6D1B1C] mb-2"
@@ -63,7 +63,7 @@ export default function AffordableApartment() {
 
             <div className="mt-6 flex flex-wrap gap-4">
 
-              {/* GO BACK */}
+              {/* going back */}
               <button
                 onClick={() => window.history.back()}
                 className="flex items-center gap-2 bg-white border border-[#B8A47C] text-[#6D1B1C] 
@@ -72,16 +72,16 @@ export default function AffordableApartment() {
                 <FaArrowLeft /> Go Back
               </button>
 
-              {/* GO HOME */}
+              {/* falling back to home */}
               <Link
-                href="/"
+                href="/home-user-subscribed"
                 className="flex items-center gap-2 bg-white border border-[#B8A47C] text-[#6D1B1C] 
                            px-6 py-2 rounded-md hover:bg-[#F4E9D8] transition"
               >
                 <FaHome /> Go to Home
               </Link>
 
-              {/* REQUEST OWNER NUMBER */}
+              {/* owner number */}
               <button className="flex items-center gap-2 bg-[#6D1B1C] text-white px-6 py-2 rounded-md hover:bg-[#541516] transition">
                 <FaPhoneAlt /> Request Owner Number
               </button>
@@ -91,7 +91,7 @@ export default function AffordableApartment() {
         </div>
       </div>
 
-      {/* PROPERTY DESCRIPTION */}
+      {/* property description */}
       <div className="mt-12 bg-white border border-[#B8A47C] rounded-xl p-10 shadow-sm">
         <h3
           className="text-2xl font-bold text-[#6D1B1C] mb-4"
@@ -108,7 +108,7 @@ export default function AffordableApartment() {
         </p>
       </div>
 
-      {/* MESSAGE TO OWNER */}
+      {/* owner messaging section*/}
       <div className="mt-12 bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <h3
           className="text-2xl font-bold text-[#6D1B1C] mb-4 text-center"

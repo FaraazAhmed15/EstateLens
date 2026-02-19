@@ -30,11 +30,11 @@ export default function ITBusinessPark() {
     <section className="max-w-6xl mx-auto px-6 mt-16 mb-20">
 
       
-      {/* HERO SECTION */}
+      {/* intro */}
       <div className="bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
-          {/* IMAGE */}
+          {/* image */}
           <div>
             <img
               src="/images/it_parl.jpeg"
@@ -43,12 +43,11 @@ export default function ITBusinessPark() {
             />
           </div>
 
-          {/* DETAILS */}
+          {/* details */}
           <div>
             <h2
               className="text-3xl font-bold text-[#6D1B1C] mb-2"
-              style={{ fontFamily: "'Sanchez', serif" }}
-            >
+              style={{ fontFamily: "'Sanchez', serif" }}>
               IT & Business Park – Manyata
             </h2>
 
@@ -90,16 +89,14 @@ export default function ITBusinessPark() {
                 <button
                   onClick={() => window.history.back()}
                   className="flex items-center gap-2 bg-white border border-[#B8A47C] text-[#6D1B1C]
-                             px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition"
-                >
+                             px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition">
                   <FaArrowLeft /> Go Back
                 </button>
 
                 <Link
-                  href="/"
+                  href="/home-user-subscribed"
                   className="flex items-center gap-2 bg-white border border-[#B8A47C] text-[#6D1B1C]
-                             px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition"
-                >
+                             px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition">
                   <FaHome /> Home
                 </Link>
               </div>
@@ -113,7 +110,7 @@ export default function ITBusinessPark() {
         </div>
       </div>
 
-      {/* PROPERTY OVERVIEW */}
+      {/* overview*/}
       <div className="mt-12 bg-white border border-[#B8A47C] rounded-xl p-10 shadow-sm">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Property Overview
@@ -134,7 +131,7 @@ export default function ITBusinessPark() {
         </p>
       </div>
 
-      {/* WHY THIS IS A GOOD INVESTMENT */}
+      {/* question part */}
       <div className="mt-12 bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-6">
           Why This is a Smart Investment
@@ -171,7 +168,7 @@ export default function ITBusinessPark() {
         </div>
       </div>
 
-      {/* CONNECTIVITY & NEARBY */}
+      {/* connectivity */}
       <div className="mt-12 bg-white border border-[#B8A47C] rounded-xl p-10 shadow-sm">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-6">
           Connectivity & Nearby Facilities
@@ -196,7 +193,7 @@ export default function ITBusinessPark() {
         </ul>
       </div>
 
-      {/* IDEAL FOR */}
+      {/*ideal case */}
       <div className="mt-12 bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-6">
           Ideal For
@@ -220,7 +217,7 @@ export default function ITBusinessPark() {
         </div>
       </div>
 
-      {/* OCCUPANCY & PEOPLE ACCOMMODATION */}
+      {/* accomodation */}
 <div className="mt-12 bg-white border border-[#B8A47C] rounded-xl p-10 shadow-sm">
   <h3 className="text-2xl font-bold text-[#6D1B1C] mb-6">
     Occupancy & People Accommodation
@@ -276,7 +273,7 @@ export default function ITBusinessPark() {
 </div>
 
 
-      {/* MESSAGE TO OWNER */}
+      {/* message to owner */}
       <div className="mt-12 bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4 text-center">
           Message to Owner

@@ -49,7 +49,6 @@ export default function AboutPage() {
             { name: "About", href: "/about", icon: <FaInfoCircle /> },
             { name: "Building Plan", href: "/building_plan", icon: <FaHome /> },
             { name: "Logins", action: "login", icon: <FaKey /> },
-            { name: "List Property", href: "/list_property", icon: <FaCity /> },
           ].map((item, index) => (
             <a
               key={index}

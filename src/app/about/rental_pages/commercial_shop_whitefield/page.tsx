@@ -82,7 +82,7 @@ export default function CommercialShopWhitefield() {
                 </button>
 
                 <Link
-                  href="/"
+                  href="/home-user-subscribed"
                   className="flex items-center gap-2 bg-white border border-[#B8A47C] text-[#6D1B1C]
                              px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition">
                   <FaHome /> Home
@@ -193,7 +193,7 @@ export default function CommercialShopWhitefield() {
         
       </div>
 
-      {/* MESSAGE TO OWNER */}
+      {/* message to owner section */}
       <div className="mt-12 bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <h3
           className="text-2xl font-bold text-[#6D1B1C] mb-4 text-center"

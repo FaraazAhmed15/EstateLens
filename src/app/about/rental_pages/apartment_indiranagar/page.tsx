@@ -69,7 +69,7 @@ export default function TwoBhkRentalIndiranagar() {
                 </button>
 
                 <Link
-                  href="/"
+                  href="/home-user-subscribed"
                   className="flex items-center gap-2 bg-white border border-[#B8A47C] text-[#6D1B1C]
                              px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition">
                   <FaHome /> Home
@@ -155,8 +155,7 @@ export default function TwoBhkRentalIndiranagar() {
 
           <button
             onClick={() => setMessage("")}
-            className="flex items-center gap-2 bg-gray-300 text-[#1F3A2E] px-6 py-2 rounded-md hover:bg-gray-400 transition"
-          >
+            className="flex items-center gap-2 bg-gray-300 text-[#1F3A2E] px-6 py-2 rounded-md hover:bg-gray-400 transition">
             <FaTrash /> Clear Message
           </button>
         </div>

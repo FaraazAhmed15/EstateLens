@@ -28,11 +28,11 @@ export default function PremiumStudioApartment() {
   return (
     <section className="max-w-6xl mx-auto px-6 mt-16 mb-20">
 
-      {/* PROPERTY HEADER */}
+      {/* header */}
       <div className="bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
-          {/* LEFT: IMAGE */}
+          {/* image */}
           <div>
             <img
               src="/images/premium_studio_apartment.jpeg"
@@ -41,7 +41,7 @@ export default function PremiumStudioApartment() {
             />
           </div>
 
-          {/* RIGHT: DETAILS */}
+          {/* details */}
           <div>
             <h2
               className="text-3xl font-bold text-[#6D1B1C] mb-2"
@@ -58,7 +58,7 @@ export default function PremiumStudioApartment() {
               ₹55 Lakhs
             </p>
 
-            {/* KEY HIGHLIGHTS */}
+            {/* highlights*/}
             <div className="grid grid-cols-2 gap-4 text-[#1F3A2E] mb-6">
               <p className="flex items-center gap-2">
                 <FaBed /> 1 BHK (Studio Style)
@@ -80,7 +80,7 @@ export default function PremiumStudioApartment() {
               </p>
             </div>
 
-            {/* ACTION BUTTONS */}
+            {/* Abuttons */}
             <div className="mt-6 space-y-4">
               <button className="flex items-center gap-2 bg-[#6D1B1C] text-white px-6 py-2 rounded-md hover:bg-[#541516] transition">
                 <FaPhoneAlt /> Request Owner Number
@@ -96,7 +96,7 @@ export default function PremiumStudioApartment() {
                 </button>
 
                 <Link
-                  href="/"
+                  href="/home-user-subscribed"
                   className="flex items-center gap-2 bg-white border border-[#B8A47C] text-[#6D1B1C]
                              px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition"
                 >
@@ -108,7 +108,7 @@ export default function PremiumStudioApartment() {
         </div>
       </div>
 
-      {/* PROPERTY OVERVIEW */}
+      {/* overview part */}
       <div className="mt-12 bg-white border border-[#B8A47C] rounded-xl p-10 shadow-sm">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Property Overview
@@ -123,7 +123,7 @@ export default function PremiumStudioApartment() {
         </p>
       </div>
 
-      {/* PROPERTY SPECIFICATIONS */}
+      {/* specifications */}
       <div className="mt-12 bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Property Specifications
@@ -141,7 +141,7 @@ export default function PremiumStudioApartment() {
         </div>
       </div>
 
-      {/* AMENITIES */}
+      {/* amenities */}
       <div className="mt-12 bg-white border border-[#B8A47C] rounded-xl p-10 shadow-sm">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Amenities
@@ -157,7 +157,7 @@ export default function PremiumStudioApartment() {
         </div>
       </div>
 
-      {/* NEARBY LANDMARKS */}
+      {/* landmarks */}
       <div className="mt-12 bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Nearby Landmarks
@@ -170,7 +170,7 @@ export default function PremiumStudioApartment() {
         </div>
       </div>
 
-      {/* WHY THIS APARTMENT IS GREAT FOR BACHELORS */}
+      {/* questioning part */}
       <div className="mt-12 bg-white border border-[#B8A47C] rounded-xl p-10 shadow-sm">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Why This Apartment is Ideal for Bachelors?
@@ -185,7 +185,7 @@ export default function PremiumStudioApartment() {
         </ul>
       </div>
 
-      {/* MESSAGE TO OWNER */}
+      {/* message to owner section */}
       <div className="mt-12 bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4 text-center">
           Message to Owner

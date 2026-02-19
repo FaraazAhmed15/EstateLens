@@ -37,16 +37,14 @@ export default function InvestmentPlot() {
             <img
               src="/images/commercial_plot.jpeg"
               alt="Investment Plot North Bengaluru"
-              className="w-full h-[350px] object-cover rounded-lg shadow-sm"
-            />
+              className="w-full h-[350px] object-cover rounded-lg shadow-sm" />
           </div>
 
           {/* right content */}
           <div>
             <h2
               className="text-3xl font-bold text-[#6D1B1C] mb-2"
-              style={{ fontFamily: "'Sanchez', serif" }}
-            >
+              style={{ fontFamily: "'Sanchez', serif" }} >
               Investment Plot — North Bengaluru
             </h2>
 
@@ -84,7 +82,7 @@ export default function InvestmentPlot() {
                 </button>
 
                 <Link
-                  href="/"
+                  href="/home-user-subscribed"
                   className="flex items-center gap-2 bg-white border border-[#B8A47C] text-[#6D1B1C]
                              px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition">
                   <FaHome /> Home
@@ -123,7 +121,7 @@ export default function InvestmentPlot() {
         </p>
       </div>
 
-      {/* WHY THIS IS A GOOD INVESTMENT */}
+      {/* Wquestioning part */}
       <div className="mt-12 bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <h3
           className="text-2xl font-bold text-[#6D1B1C] mb-6"

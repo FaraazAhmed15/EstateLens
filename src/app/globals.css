@@ -54,7 +54,7 @@ body {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-/* IMAGE CONTAINER — CONTROLS SIZE */
+/* image container*/
 .amenity-image {
   width: 120px;
   height: 120px;
@@ -64,14 +64,14 @@ body {
   z-index: 1;
 }
 
-/* IMAGE — FILLS THE BOX */
+/* filling image box*/
 .amenity-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;   /* IMPORTANT */
+  object-fit: cover;   
 }
 
-/* TITLE */
+/* title */
 .amenity-card h4 {
   font-size: 1.1rem;
   font-weight: 600;
@@ -92,10 +92,10 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("/images/leafs.jpeg"); /* your leaf texture */
+  background-image: url("/images/leafs.jpeg"); /*  leaf texture */
   background-size: cover;
   background-position: center;
-  opacity: 0.12;          /* subtle like your screenshot */
+  opacity: 0.12;         
   z-index: 0;
 }
 

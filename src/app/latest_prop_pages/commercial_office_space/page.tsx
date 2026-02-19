@@ -28,10 +28,10 @@ export default function CommercialOffice() {
     <section className="max-w-6xl mx-auto px-6 mt-16 mb-20">
    
 
-      {/* HEADER SECTION */}
+      {/* header*/}
       <div className="bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          {/* IMAGE */}
+          {/* image */}
           <div>
             <img
               src="/images/commercial_office.jpeg"
@@ -40,7 +40,7 @@ export default function CommercialOffice() {
             />
           </div>
 
-          {/* DETAILS */}
+          {/* details */}
           <div>
             <h2
               className="text-3xl font-bold text-[#6D1B1C] mb-2"
@@ -88,7 +88,7 @@ export default function CommercialOffice() {
     </button>
 
     <Link
-      href="/"
+      href="/home-user-subscribed"
       className="flex items-center gap-2 bg-white border border-[#B8A47C] text-[#6D1B1C]
                  px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition"
     >
@@ -104,7 +104,7 @@ export default function CommercialOffice() {
         </div>
       </div>
 
-      {/* PROPERTY OVERVIEW */}
+      {/* overview section */}
       <div className="mt-12 bg-white border border-[#B8A47C] rounded-xl p-10 shadow-sm">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Property Overview
@@ -119,7 +119,7 @@ export default function CommercialOffice() {
         </p>
       </div>
 
-      {/* KEY SPECIFICATIONS */}
+      {/* specifications */}
       <div className="mt-12 bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Key Specifications
@@ -135,7 +135,7 @@ export default function CommercialOffice() {
         </div>
       </div>
 
-      {/* AMENITIES */}
+      {/* amenities */}
       <div className="mt-12 bg-white border border-[#B8A47C] rounded-xl p-10 shadow-sm">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Amenities
@@ -151,7 +151,7 @@ export default function CommercialOffice() {
         </div>
       </div>
 
-      {/* LOCALITY HIGHLIGHTS */}
+      {/* highlights */}
       <div className="mt-12 bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Locality Highlights
@@ -166,7 +166,7 @@ export default function CommercialOffice() {
         </ul>
       </div>
 
-      {/* MESSAGE TO OWNER */}
+      {/* message to owner section */}
       <div className="mt-12 bg-white border border-[#B8A47C] rounded-xl p-10 shadow-sm">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4 text-center">
           Message to Owner

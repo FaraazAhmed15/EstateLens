@@ -32,8 +32,7 @@ export default function AffordableResidentialPlot() {
             <img
               src="/images/plot.jpeg"
               alt="Affordable Residential Plot"
-              className="w-full h-[350px] object-cover rounded-lg shadow-sm"
-            />
+              className="w-full h-[350px] object-cover rounded-lg shadow-sm" />
           </div>
 
           {/* right side */}
@@ -76,7 +75,7 @@ export default function AffordableResidentialPlot() {
                 </button>
 
                 <Link
-                  href="/"
+                  href="/home-user-subscribed"
                   className="flex items-center gap-2 bg-white border border-[#B8A47C] text-[#6D1B1C]
                              px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition" >
                   <FaHome /> Home

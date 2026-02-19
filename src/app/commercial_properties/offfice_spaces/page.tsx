@@ -28,24 +28,22 @@ export default function CommercialOffice() {
     <section className="max-w-6xl mx-auto px-6 mt-16 mb-20">
    
 
-      {/* HEADER SECTION */}
+      {/* intro */}
       <div className="bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          {/* IMAGE */}
+          {/* image */}
           <div>
             <img
               src="/images/commercial_office.jpeg"
               alt="Commercial Office Space"
-              className="w-full h-[350px] object-cover rounded-lg shadow-sm"
-            />
+              className="w-full h-[350px] object-cover rounded-lg shadow-sm"/>
           </div>
 
-          {/* DETAILS */}
+          {/* details */}
           <div>
             <h2
               className="text-3xl font-bold text-[#6D1B1C] mb-2"
-              style={{ fontFamily: "'Sanchez', serif" }}
-            >
+              style={{ fontFamily: "'Sanchez', serif" }}>
               Grade A Commercial Office Space
             </h2>
 
@@ -77,21 +75,19 @@ export default function CommercialOffice() {
             <div className="mt-6 space-y-4">
  
 
-  {/* Secondary Navigation Buttons */}
+  {/* buttons */}
   <div className="flex gap-4">
     <button
       onClick={() => window.history.back()}
       className="flex items-center gap-2 bg-white border border-[#B8A47C] text-[#6D1B1C]
-                 px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition"
-    >
+                 px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition">
       <FaArrowLeft /> Go Back
     </button>
 
     <Link
-      href="/"
+      href="/home-user-subscribed"
       className="flex items-center gap-2 bg-white border border-[#B8A47C] text-[#6D1B1C]
-                 px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition"
-    >
+                 px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition">
       <FaHome /> Home
     </Link>
   </div>
@@ -104,7 +100,7 @@ export default function CommercialOffice() {
         </div>
       </div>
 
-      {/* PROPERTY OVERVIEW */}
+      {/* overview */}
       <div className="mt-12 bg-white border border-[#B8A47C] rounded-xl p-10 shadow-sm">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Property Overview
@@ -119,7 +115,7 @@ export default function CommercialOffice() {
         </p>
       </div>
 
-      {/* KEY SPECIFICATIONS */}
+      {/* specifications */}
       <div className="mt-12 bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Key Specifications
@@ -135,7 +131,7 @@ export default function CommercialOffice() {
         </div>
       </div>
 
-      {/* AMENITIES */}
+      {/* amenities */}
       <div className="mt-12 bg-white border border-[#B8A47C] rounded-xl p-10 shadow-sm">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Amenities
@@ -151,7 +147,7 @@ export default function CommercialOffice() {
         </div>
       </div>
 
-      {/* LOCALITY HIGHLIGHTS */}
+      {/* Lhighlights */}
       <div className="mt-12 bg-[#FDF4E2] border border-[#B8A47C] rounded-xl p-10 shadow-md">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4">
           Locality Highlights
@@ -166,7 +162,7 @@ export default function CommercialOffice() {
         </ul>
       </div>
 
-      {/* MESSAGE TO OWNER */}
+      {/* message to owner section */}
       <div className="mt-12 bg-white border border-[#B8A47C] rounded-xl p-10 shadow-sm">
         <h3 className="text-2xl font-bold text-[#6D1B1C] mb-4 text-center">
           Message to Owner

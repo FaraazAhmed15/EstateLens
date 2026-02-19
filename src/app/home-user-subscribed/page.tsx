@@ -45,13 +45,12 @@ export default function Home_User_Subscribed() {
         {/* left side content */}
         <div className="w-full mt-12 border border-[#B8A47C] rounded-lg overflow-hidden bg-[#F4F1EC] z-10">
           {[
-            { name: "Properties", href: "/properties", icon: <FaBuilding /> },
+            { name: "Properties", href: "/home-user-subscribed/home-user-subscribed-properties", icon: <FaBuilding /> },
             { name: "Market Insight", href: "/market_insight", icon: <FaNewspaper /> },
             { name: "Sign Up", href: "/sign_up", icon: <FaSignInAlt /> },
             { name: "About", href: "/about", icon: <FaInfoCircle /> },
             { name: "Building Plan", href: "/building_plan", icon: <FaHome /> },
             { name: "Logins", action: "login", icon: <FaKey /> },
-            { name: "List Property", href: "/list_property", icon: <FaCity /> },
           ].map((item, index) => (
             <a
               key={index}
@@ -73,10 +72,10 @@ export default function Home_User_Subscribed() {
         </div>
       </div>
 
-      {/* ===================== RIGHT CONTENT AREA ===================== */}
+      {/* right content area*/}
 <div className="flex-1 ml-[360px] relative bg-[#F4F1EC] overflow-y-auto">
 
-  {/* CURVED IMAGE HEADER */}
+  {/* image structure */}
   <div className="absolute top-0 left-0 w-full h-[90px] overflow-hidden">
     <svg
       viewBox="0 0 1000 100"
@@ -103,10 +102,10 @@ export default function Home_User_Subscribed() {
     </svg>
   </div>
 
-  {/* PAGE CONTENT */}
+  {/* content */}
   <div className="pt-[120px] p-8">
 
-    {/* HERO TITLE */}
+    {/* hero/ title*/}
     <h1
       className="text-5xl font-bold mb-4 text-center text-[#6D1B1C]"
       style={{ fontFamily: "'Sanchez', serif" }}
@@ -125,7 +124,7 @@ export default function Home_User_Subscribed() {
     
 
 
-    {/* OUR MISSION (YOUR EXISTING SECTION - KEPT) */}
+    {/* mission */}
     <div className="mt-20 bg-[#FDF4E2] text-3xl font-bold mb-4 text-center text-[#6D1B1C] p-6 rounded-lg shadow-lg mx-14"
       style={{ fontFamily: "'Sanchez', serif" }}
     >
@@ -143,7 +142,7 @@ export default function Home_User_Subscribed() {
 
 
      
-{/* PROPERTY SEARCH SECTION */}
+{/* search section */}
 <section className="mb-4 mt-10 ml-4">
   <div className="max-w-6xl mx-auto bg-white border border-[#B8A47C] rounded-xl shadow-lg p-8">
 
@@ -155,7 +154,7 @@ export default function Home_User_Subscribed() {
       Find the Right Property
     </h2>
 
-    {/* SEARCH FORM */}
+    {/* search form */}
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
 
       {/* Location */}
@@ -211,7 +210,7 @@ export default function Home_User_Subscribed() {
 
 
 
-    {/* NEW SECTION: OUR VISION */}
+    {/* vision*/}
     <div className="mt-16 mx-14 bg-white border border-[#B8A47C] rounded-xl p-8 shadow-sm">
       <h2
         className="text-2xl font-bold text-[#6D1B1C] mb-4"
@@ -228,7 +227,7 @@ export default function Home_User_Subscribed() {
       </p>
     </div>
 
-    {/* NEW SECTION: WHY ESTATELENS */}
+    {/* question */}
     <section className="mt-16 mx-14">
       <h2
         className="text-3xl font-bold text-center text-[#6D1B1C] mb-8"
@@ -263,7 +262,7 @@ export default function Home_User_Subscribed() {
       </div>
     </section>
 
-    {/* NEW SECTION: WHO WE SERVE */}
+    {/* who we serve */}
     <section className="mt-16 mx-14">
       <h2
         className="text-3xl font-bold text-center text-[#6D1B1C] mb-8"
@@ -298,7 +297,7 @@ export default function Home_User_Subscribed() {
       </div>
     </section>
 
-    {/* NEW SECTION: HOW IT WORKS */}
+    {/* how it works*/}
     <section className="mt-16 mx-14">
       <h2
         className="text-3xl font-bold text-center text-[#6D1B1C] mb-8"
@@ -332,10 +331,10 @@ export default function Home_User_Subscribed() {
       </div>
     </section>
 
-    {/* YOUR EXISTING CALCULATOR (UNCHANGED) */}
+    {/* calculator */}
     <PriceCalculator />
 
-    {/* YOUR EXISTING FEATURED PROPERTIES (UNCHANGED) */}
+    {/* featured properties */}
     <section className="mt-14 ml-6 mb-16">
       <h2
         className="text-3xl font-bold text-center text-[#6D1B1C] mb-12"
