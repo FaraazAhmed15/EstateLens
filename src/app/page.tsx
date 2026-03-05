@@ -144,52 +144,84 @@ export default function HomePage() {
           />
         </div>
       </section>
-      {/* Newest Listing*/}
-      <section className="mt-12 mb-12 px-6">
-        <h2
-          className="text-3xl font-bold text-center text-[#6D1B1C] mb-12"
-          style={{ fontFamily: "'Sanchez', serif" }}
-        >
-          Newest Listings
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 max-w-7xl mx-auto">
-          {/* Card 1 */}
-          <PropertyCard
-            img="/images/traditional_village_house.jpeg"
-            title="Luxury Residential Apartment"
-            desc="2 BHK • Bengaluru • Near Metro"
-            price="₹ 85 Lakhs"
-            onClick={() => setShowPopup(true)}
-          />
+      {/* featured properties */}
+    <section className="mt-14 ml-6 mb-16">
+      <h2
+        className="text-3xl font-bold text-center text-[#6D1B1C] mb-12"
+        style={{ fontFamily: "'Sanchez', serif" }}>
+        Featured Properties
+      </h2>
 
-          {/* Card 2 */}
-          <PropertyCard
-            img="/images/villa4.jpeg"
-            title="Commercial Office Space"
-            desc="IT Park • Whitefield"
-            price="₹ 9.4 Crore"
-            onClick={() => setShowPopup(true)}
-          />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
 
-          {/* Card 3 */}
-          <PropertyCard
-            img="/images/latest_farm_house.jpeg"
-            title="Premium Independent Villa"
-            desc="Gated Community • Mysuru"
-            price="₹ 2.1 Crore"
-            onClick={() => setShowPopup(true)}
-          />
-
-          {/* Card 4 */}
-          <PropertyCard
-            img="/images/single_family_home.jpeg"
-            title="Single Family Home"
-            desc="R.M.V. Extension, Bengaluru"
-            price="₹ 3.2 Crore"
-            onClick={() => setShowPopup(true)}
-          />
+        {/* CARD 1 */}
+        <Link href="/latest_prop_pages/home_residential" className="group">
+          <div className="bg-white border border-[#B8A47C] rounded-xl shadow-md overflow-hidden
+                          hover:shadow-xl transition cursor-pointer">
+            <img
+              src="/images/home_card1.jpeg"
+              alt="Residential Apartment"
+              className="w-full h-[200px] object-cover"/>
+            <div className="p-6">
+              <h4 className="text-lg font-semibold text-[#6D1B1C] mb-2 group-hover:underline">
+                Luxury Residential Apartment
+              </h4>
+              <p className="text-sm text-[#1F3A2E] mb-3">
+                2 BHK • Bengaluru • Near Metro
+              </p>
+              <p className="text-sm font-medium text-[#A66E3A]">
+                ₹ 85 Lakhs
+              </p>
+            </div>
           </div>
-        </section>
+        </Link>
+
+        {/* CARD 2 */}
+        <Link href="/latest_prop_pages/home_office" className="group">
+          <div className="bg-white border border-[#B8A47C] rounded-xl shadow-md overflow-hidden
+                          hover:shadow-xl transition cursor-pointer">
+            <img
+              src="/images/home_card2.jpeg"
+              alt="Commercial Space"
+              className="w-full h-[200px] object-cover"/>
+            <div className="p-6">
+              <h4 className="text-lg font-semibold text-[#6D1B1C] mb-2 group-hover:underline">
+                Commercial Office Space
+              </h4>
+              <p className="text-sm text-[#1F3A2E] mb-3">
+                IT Park • Whitefield
+              </p>
+              <p className="text-sm font-medium text-[#A66E3A]">
+                ₹ 9.4 Crore
+              </p>
+            </div>
+          </div>
+        </Link>
+
+        {/* CARD 3 */}
+        <Link href="/latest_prop_pages/home_villa" className="group">
+          <div className="bg-white border border-[#B8A47C] rounded-xl shadow-md overflow-hidden
+                          hover:shadow-xl transition cursor-pointer">
+            <img
+              src="/images/home_card3.jpeg"
+              alt="Villa Property"
+              className="w-full h-[200px] object-cover"/>
+            <div className="p-6">
+              <h4 className="text-lg font-semibold text-[#6D1B1C] mb-2 group-hover:underline">
+                Premium Independent Villa
+              </h4>
+              <p className="text-sm text-[#1F3A2E] mb-3">
+                Gated Community • Mysuru
+              </p>
+              <p className="text-sm font-medium text-[#A66E3A]">
+                ₹ 2.1 Crore
+              </p>
+            </div>
+          </div>
+        </Link>
+
+      </div>
+    </section>
         {/* NEARBY LIFESTYLE & AMENITIES */}
 <section className="mt-10 mb-20">
   <h2
@@ -214,7 +246,7 @@ export default function HomePage() {
         <div className="amenity-image">
           <img src={item.img} alt={item.title} />
         </div>
-        <h4 style={{ fontFamily: "'Sanchez', serif" }}>{item.title}</h4>{/* image text */}
+        <h4 style={{ fontFamily: "'Sanchez', serif" }}>{item.title}</h4>
 
 
        
@@ -311,9 +343,7 @@ export default function HomePage() {
         onClose={() => setShowPopup(false)}
       />
 
-      {showLoginModal && (
-        <LoginModal onClose={() => setShowLoginModal(false)} />
-      )}
+      
     </div>
   );
 }

@@ -35,7 +35,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
-  ],
+, "src/app/api/signup/signup/rougte.js", "src/app/api/properties/route.js"  ],
   "exclude": [
     "node_modules"
   ]
