@@ -3,6 +3,7 @@ import {
   FaInstagram,
   FaMapMarkerAlt,
 } from "react-icons/fa";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -95,8 +96,16 @@ export default function Footer() {
       </div>
 
       {/* footers bottom */}
-      <div className="border-t border-[#B8A47C] text-center py-4 text-sm text-[#1F3A2E]">
-        © {new Date().getFullYear()} EstateLens. All rights reserved.
+      <div className="border-t border-[#B8A47C] py-4 px-8 text-sm text-[#1F3A2E] flex flex-col md:flex-row items-center justify-between">
+        <p>
+          © {new Date().getFullYear()} EstateLens. All rights reserved.
+        </p>
+
+        <Link href="/feedback">
+          <button className="mt-3 md:mt-0 bg-[#1C2B39] text-white px-5 py-2 rounded-lg hover:bg-[#C6A75E] transition duration-300">
+            Feedback
+          </button>
+        </Link>
       </div>
     </footer>
   );

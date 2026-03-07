@@ -8,7 +8,8 @@ import {
   FaBuilding,
   FaPhone,
   FaSignInAlt,
-  FaUserPlus
+  FaUserPlus,
+  FaHeart
 } from "react-icons/fa";
 
 import SignupPopup from "@/components/signup_modal";
@@ -39,10 +40,20 @@ export default function Navbar() {
           {/* BUTTONS */}
           <div className="flex items-center gap-4">
 
+            {/* WISHLIST BUTTON */}
+            <Link
+              href="/wishlist"
+              className="text-[#0F2A44] font-medium hover:text-[#7A1F2B] flex gap-2"
+            >
+              <FaHeart />
+              Wishlist
+            </Link>
+
             <button
               onClick={() => setOpenLogin(true)}
               className="text-[#0F2A44] font-medium hover:text-[#7A1F2B] flex gap-2"
-            ><FaSignInAlt />
+            >
+              <FaSignInAlt />
               Log In
             </button>
 

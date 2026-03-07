@@ -1,5 +1,5 @@
 "use client";
-
+import WishlistButton from "@/components/WishlistButton";
 import { useState } from "react";
 import Link from "next/link";
 import {
@@ -94,6 +94,7 @@ export default function CommercialOffice() {
     >
       <FaHome /> Home
     </Link>
+    <WishlistButton />
   </div>
 </div>
 

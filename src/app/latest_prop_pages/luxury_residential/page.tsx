@@ -1,5 +1,5 @@
 "use client";
-
+import WishlistButton from "@/components/WishlistButton";
 import { useState } from "react";
 import Link from "next/link";
 import { 
@@ -80,6 +80,7 @@ export default function AffordableApartment() {
               >
                 <FaHome /> Go to Home
               </Link>
+              <WishlistButton />
 
               {/* owner number */}
               <button className="flex items-center gap-2 bg-[#6D1B1C] text-white px-6 py-2 rounded-md hover:bg-[#541516] transition">

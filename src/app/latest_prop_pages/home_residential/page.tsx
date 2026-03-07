@@ -1,5 +1,5 @@
 "use client";
-
+import WishlistButton from "@/components/WishlistButton";
 import { useState } from "react";
 import Link from "next/link";
 import {
@@ -99,6 +99,7 @@ export default function ResidentialHome() {
                              px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition">
                   <FaHome /> Home
                 </Link>
+                <WishlistButton />
               </div>
             </div>
           </div>
