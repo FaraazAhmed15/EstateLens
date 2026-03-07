@@ -1,39 +1,38 @@
-// app/api/login/route.js
-import { NextResponse } from "next/server";
 import mysql from "mysql2/promise";
+import { NextResponse } from "next/server";
+import { loginValidation } from "@/lib/validation/loginValidation";
 
 export async function POST(req) {
   try {
-    const body = await req.json();
-    const { email, password } = body;
+    const { email, password } = await req.json();
 
-    if (!email || !password) {
-      return NextResponse.json({ message: "All fields are required" }, { status: 400 });
-    }
-
-    // 🔹 Connect to MySQL
-    const connection = await mysql.createConnection({
+    const db = await mysql.createConnection({
       host: "localhost",
       user: "root",
-      password: "", // your MySQL root password
-      database: "housing", // same DB as signup
+      password: "",
+      database: "housing",
     });
 
-    // 🔹 Check if user exists
-    const [rows] = await connection.execute(
+    const [rows] = await db.execute(
       "SELECT * FROM users WHERE email = ? AND password = ?",
       [email, password]
     );
 
-    await connection.end();
+    await db.end();
 
-    if (rows.length === 0) {
-      return NextResponse.json({ message: "Invalid email or password" }, { status: 401 });
+    if (rows.length > 0) {
+      return NextResponse.json({
+        message: "Successfully done",
+      });
+    } else {
+      return NextResponse.json({
+        message: "Invalid user",
+      });
     }
 
-    return NextResponse.json({ message: "Login successful!" });
-  } catch (err) {
-    console.error("Login API Error:", err);
-    return NextResponse.json({ message: "Server error" }, { status: 500 });
+  } catch (error) {
+    return NextResponse.json({
+      message: "Server error",
+    });
   }
 }

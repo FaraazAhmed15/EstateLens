@@ -12,25 +12,42 @@ interface LoginPopupProps {
 export default function LoginPopup({
   isOpen,
   onClose,
-  onSwitchToSignup
+  onSwitchToSignup,
 }: LoginPopupProps) {
-  const [showPassword, setShowPassword] = useState(false);
+
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   if (!isOpen) return null;
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const res = await fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+    alert(data.message);
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
 
-      {/* OVERLAY */}
+      {/* Overlay */}
       <div
         className="absolute inset-0 bg-black/40 backdrop-blur-sm"
         onClick={onClose}
       />
 
-      {/* MODAL */}
+      {/* Modal */}
       <div className="relative w-full max-w-md bg-white p-8 rounded-2xl shadow-xl border border-[#6D1B1C]/20 z-10">
 
-        {/* CLOSE */}
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-500 hover:text-[#6D1B1C]"
@@ -38,38 +55,45 @@ export default function LoginPopup({
           <FaTimes />
         </button>
 
-        {/* HEADER */}
-        <header className="text-center">
-          <h1 className="text-2xl font-bold text-[#6D1B1C]">
-            Welcome Back
-          </h1>
-          <p className="text-gray-600 mt-2 text-sm">
-            Sign in to access your dashboard
-          </p>
-        </header>
+        <h1 className="text-2xl font-bold text-[#6D1B1C] text-center">
+          Welcome Back
+        </h1>
 
-        {/* FORM */}
-        <form className="mt-6 space-y-5">
+        <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+
+          {/* Email */}
           <div>
             <label className="block text-sm text-gray-700 mb-1">
               Email Address
             </label>
+
             <input
               type="email"
-              className="w-full px-4 py-3 rounded-lg bg-[#FDF4E2] border border-gray-300 focus:border-[#6D1B1C] outline-none text-sm"
+              value={email}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setEmail(e.target.value)
+              }
+              className="w-full px-4 py-3 rounded-lg bg-[#FDF4E2] border border-gray-300"
             />
           </div>
 
-          {/* PASSWORD */}
+          {/* Password */}
           <div>
             <label className="block text-sm text-gray-700 mb-1">
               Password
             </label>
+
             <div className="relative">
+
               <input
                 type={showPassword ? "text" : "password"}
-                className="w-full px-4 py-3 pr-12 rounded-lg bg-[#FDF4E2] border border-gray-300 focus:border-[#6D1B1C] outline-none text-sm"
+                value={password}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setPassword(e.target.value)
+                }
+                className="w-full px-4 py-3 pr-12 rounded-lg bg-[#FDF4E2] border border-gray-300"
               />
+
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
@@ -77,15 +101,18 @@ export default function LoginPopup({
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
+
             </div>
           </div>
 
+          {/* Login Button */}
           <button className="w-full mt-4 px-6 py-3 rounded-lg bg-[#6D1B1C] text-white font-semibold">
             Sign In
           </button>
+
         </form>
 
-        {/* SWITCH */}
+        {/* Switch to Signup */}
         <p className="text-center text-sm text-gray-600 mt-6">
           Don’t have an account?
           <span
@@ -102,4 +129,5 @@ export default function LoginPopup({
       </div>
     </div>
   );
+
 }
