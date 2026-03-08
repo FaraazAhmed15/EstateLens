@@ -1,27 +1,36 @@
-export function filterProperties(data, filters) {
+export function filterProperties({ location, type, category, budget, bhk }) {
+  let query = "SELECT DISTINCT * FROM properties WHERE 1=1"; // DISTINCT avoids duplicates
+  let values = [];
 
-  return data.filter((property) => {
+  // Apply only if the field has a value
+  if (location) {
+    query += " AND location LIKE ?";
+    values.push(`%${location}%`); // partial match
+  }
 
-    if (
-      filters.location &&
-      !property.location.toLowerCase().includes(filters.location.toLowerCase())
-    ) {
-      return false
-    }
+  if (type) {
+    query += " AND type = ?";
+    values.push(type);
+  }
 
-    if (filters.type && property.type !== filters.type) {
-      return false
-    }
+  if (category) {
+    query += " AND category = ?";
+    values.push(category);
+  }
 
-    if (filters.bhk && property.bhk != filters.bhk) {
-      return false
-    }
+  if (bhk) {
+    query += " AND bhk = ?";
+    values.push(bhk);
+  }
 
-    if (filters.budget && property.budget !== filters.budget) {
-      return false
-    }
+  // Budget filter
+  if (budget === "Below50L") {
+    query += " AND price < 5000000";
+  } else if (budget === "50L-1Cr") {
+    query += " AND price BETWEEN 5000000 AND 10000000";
+  } else if (budget === "Above1Cr") {
+    query += " AND price > 10000000";
+  }
 
-    return true
-  })
-
+  return { query, values };
 }
