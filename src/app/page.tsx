@@ -16,7 +16,7 @@ export default function HomePage() {
   const [showPopup, setShowPopup] = useState(false);
 
   const placeholders = [
-    "$Residential Plot, 1200 sqft , Devanahalli",
+    "Residential Plot, 1200 sqft , Devanahalli",
     "3.2 Crore villa in R.M.V. Extension",
     "Retail Space in Whitefield, 1500 sqft",
     "Luxury Villa with Garden",
@@ -61,8 +61,8 @@ export default function HomePage() {
 
           {/* MENU LINKS */}
           <div className="flex gap-6 justify-center mb-6 text-lg font-medium flex-wrap">
-            <Link href="/properties" className="hover:underline">Buy</Link>
-            <Link href="/properties" className="hover:underline">Rent</Link>
+            <Link href="/home-user-subscribed/home-user-subscribed-properties" className="hover:underline">Buy</Link>
+            <Link href="/home-user-subscribed/home-user-subscribed-properties" className="hover:underline">Rent</Link>
             <Link href="/sell" className="hover:underline">Sell</Link>
             <Link href="/pre-approval" className="hover:underline">Pre-approval</Link>
             <Link href="/market_insight" className="hover:underline">market Insight</Link>
@@ -113,7 +113,7 @@ export default function HomePage() {
             title="Residential Apartment"
             desc="2 BHK • Bengaluru • Near Metro"
             price="₹ 85 Lakhs"
-            onClick={() => setShowPopup(true)}
+            href="/latest_prop_pages/home_residential"
           />
 
           {/* Card 2 */}
@@ -122,7 +122,7 @@ export default function HomePage() {
             title="Commercial Office Space"
             desc="IT Park • Whitefield"
             price="₹ 9.4 Crore"
-            onClick={() => setShowPopup(true)}
+            href="/latest_prop_pages/home_office"
           />
 
           {/* Card 3 */}
@@ -131,7 +131,7 @@ export default function HomePage() {
             title="Premium Independent Villa"
             desc="Gated Community • Mysuru"
             price="₹ 2.1 Crore"
-            onClick={() => setShowPopup(true)}
+            href="/latest_prop_pages/home_villa"
           />
 
           {/* Card 4 */}
@@ -140,7 +140,7 @@ export default function HomePage() {
             title="Single Family Home"
             desc="R.M.V. Extension, Bengaluru"
             price="₹ 3.2 Crore"
-            onClick={() => setShowPopup(true)}
+            href="/single_family_home"
           />
         </div>
       </section>
@@ -353,30 +353,32 @@ type PropertyCardProps = {
   title: string;
   desc: string;
   price: string;
-  onClick: () => void;
+  href: string
 };
 
-function PropertyCard({ img, title, desc, price, onClick }: PropertyCardProps) {
+
+
+function PropertyCard({ img, title, desc, price, href }: PropertyCardProps) {
   return (
-    <div
-      onClick={onClick}
-      className="group cursor-pointer bg-white border border-[#B8A47C] rounded-xl shadow-md overflow-hidden hover:shadow-xl transition"
-    >
-      <img
-        src={img}
-        alt={title}
-        className="w-full h-[200px] object-cover"
-      />
-      <div className="p-6">
-        <h4 className="text-lg font-semibold text-[#6D1B1C] mb-2">
-          {title}
-        </h4>
-        <p className="text-sm text-[#1F3A2E] mb-3">{desc}</p>
-        <p className="text-sm font-medium text-[#A66E3A] mb-4">{price}</p>
-        <button className="bg-[#6D1B1C] text-white px-5 py-2 rounded-md hover:bg-[#541516] transition">
-          View Details
-        </button>
+    <Link href={href} className="group">
+      <div className="cursor-pointer bg-white border border-[#B8A47C] rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
+        <img
+          src={img}
+          alt={title}
+          className="w-full h-[200px] object-cover"
+        />
+        <div className="p-6">
+          <h4 className="text-lg font-semibold text-[#6D1B1C] mb-2">
+            {title}
+          </h4>
+          <p className="text-sm text-[#1F3A2E] mb-3">{desc}</p>
+          <p className="text-sm font-medium text-[#A66E3A] mb-4">{price}</p>
+
+          <button className="bg-[#6D1B1C] text-white px-5 py-2 rounded-md hover:bg-[#541516] transition">
+            View Details
+          </button>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }

@@ -32,7 +32,7 @@ export default function Navbar() {
           {/* MENU */}
           <nav className="hidden md:flex items-center gap-8 text-[16px] font-medium">
             <Link href="/" className="hover:text-[#7A1F2B] flex gap-2"><FaHome />Home</Link>
-            <Link href="/properties" className="hover:text-[#7A1F2B] flex gap-2"><FaBuilding />Properties</Link>
+            <Link href="/home-user-subscribed/home-user-subscribed-properties" className="hover:text-[#7A1F2B] flex gap-2"><FaBuilding />Properties</Link>
             <Link href="/about" className="hover:text-[#7A1F2B] flex gap-2"><FaInfoCircle />About</Link>
             <Link href="/contact" className="hover:text-[#7A1F2B] flex gap-2"><FaPhone />Contact</Link>
           </nav>
