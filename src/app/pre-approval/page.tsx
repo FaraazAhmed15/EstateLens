@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { getSession } from "@/lib/session";
 
 export default function PreApprovalPage() {
 
@@ -88,11 +89,41 @@ export default function PreApprovalPage() {
     return Object.keys(newErrors).length===0
   }
 
-  const handleSubmit=()=>{
-    if(validateForm()){
-      setSubmitted(true)
+  const handleSubmit = async () => {
+
+  if (!validateForm()) return;
+
+  try {
+
+    const userName = getSession();
+
+    const response = await fetch("/api/preapproval", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        userName,
+        income,
+        loanAmount,
+        propertyPrice: price
+      })
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      setSubmitted(true);
+    } else {
+      alert("Submission failed");
     }
+
+  } catch (error) {
+    console.error(error);
+    alert("Server error");
   }
+
+};
 
   return(
 

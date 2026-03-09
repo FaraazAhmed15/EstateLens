@@ -1,17 +1,46 @@
 "use client";
 
 import { useState } from "react";
+import { getSession } from "@/lib/session";
 
 export default function FeedbackPage() {
   const [feedback, setFeedback] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = () => {
-    if (feedback.trim() === "") return;
-    setSubmitted(true);
-    setFeedback("");
-  };
+const handleSubmit = async () => {
 
+  if(feedback.trim() === "") return;
+
+  try{
+
+    const userName = getSession();
+
+    const response = await fetch("/api/feedback",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify({
+        userName,
+        message: feedback
+      })
+    });
+
+    const data = await response.json();
+
+    if(data.success){
+      setSubmitted(true);
+      setFeedback("");
+    }else{
+      alert("Error submitting feedback");
+    }
+
+  }catch(error){
+    console.error(error);
+    alert("Server error");
+  }
+
+};
   return (
     <div className="min-h-screen bg-[#1CA7A6] flex items-center justify-center px-6 py-16">
 
