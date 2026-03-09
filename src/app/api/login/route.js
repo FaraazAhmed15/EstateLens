@@ -1,18 +1,26 @@
 import mysql from "mysql2/promise";
 import { NextResponse } from "next/server";
-import { loginValidation } from "@/lib/validation/loginValidation";
 
 export async function POST(req) {
   try {
     const { email, password } = await req.json();
 
+    if (!email || !password) {
+      return NextResponse.json(
+        { message: "All fields are required" },
+        { status: 400 }
+      );
+    }
+
+    // Connect to MySQL
     const db = await mysql.createConnection({
       host: "localhost",
       user: "root",
-      password: "",
+      password: "", // your MySQL password
       database: "housing",
     });
 
+    // Check if user exists
     const [rows] = await db.execute(
       "SELECT * FROM users WHERE email = ? AND password = ?",
       [email, password]
@@ -20,19 +28,24 @@ export async function POST(req) {
 
     await db.end();
 
-    if (rows.length > 0) {
-      return NextResponse.json({
-        message: "Successfully done",
-      });
-    } else {
-      return NextResponse.json({
-        message: "Invalid user",
-      });
+    if (rows.length === 0) {
+      return NextResponse.json(
+        { message: "Invalid email or password" },
+        { status: 401 }
+      );
     }
 
-  } catch (error) {
+    // 🔹 Fix: send name as string, not object
     return NextResponse.json({
-      message: "Server error",
+      message: "Login successful",
+      name: rows[0].name, // use this for session
     });
+
+  } catch (error) {
+    console.error("Login API error:", error);
+    return NextResponse.json(
+      { message: "Server error" },
+      { status: 500 }
+    );
   }
 }

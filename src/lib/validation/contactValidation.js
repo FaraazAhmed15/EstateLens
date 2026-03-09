@@ -15,6 +15,13 @@ export function validateContact(data) {
     errors.email = "Invalid email format";
   }
 
+  // ADDED PHONE VALIDATION
+  if (!data.phone || data.phone.trim() === "") {
+    errors.phone = "Phone number is required";
+  } else if (!/^[0-9]{10}$/.test(data.phone)) {
+    errors.phone = "Phone number must be 10 digits";
+  }
+
   // Message validation
   if (!data.message || data.message.trim() === "") {
     errors.message = "Message is required";

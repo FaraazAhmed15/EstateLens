@@ -7,6 +7,7 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",   // ADDED
     message: "",
   });
 
@@ -20,7 +21,7 @@ export default function ContactPage() {
     const errors = validateContact(formData);
 
     if (Object.keys(errors).length > 0) {
-      setError(Object.values(errors)[0]);
+      setError(Object.values(errors)[0] as string);
       return;
     }
 
@@ -47,6 +48,7 @@ export default function ContactPage() {
     setFormData({
       name: "",
       email: "",
+      phone: "",   // ADDED
       message: "",
     });
   };
@@ -87,6 +89,17 @@ export default function ContactPage() {
             value={formData.email}
             onChange={(e) =>
               setFormData({ ...formData, email: e.target.value })
+            }
+            className="w-full px-4 py-3 rounded-lg border"
+          />
+
+          {/* ADDED PHONE INPUT */}
+          <input
+            type="tel"
+            placeholder="Phone Number"
+            value={formData.phone}
+            onChange={(e) =>
+              setFormData({ ...formData, phone: e.target.value })
             }
             className="w-full px-4 py-3 rounded-lg border"
           />

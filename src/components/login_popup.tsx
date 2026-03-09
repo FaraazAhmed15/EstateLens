@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FaEye, FaEyeSlash, FaTimes } from "react-icons/fa";
+import { login as setSession } from "@/lib/session"; // cmt: session helper
 
 interface LoginPopupProps {
   isOpen: boolean;
@@ -26,19 +27,24 @@ export default function LoginPopup({
 
     const res = await fetch("/api/login", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
 
     const data = await res.json();
-    alert(data.message);
+
+    // 🔹 Fix: use data.message (string) instead of alerting object
+    if (data.name) {
+      setSession(data.name); // cmt: set session
+      alert(data.message); // shows "Login successful"
+      onClose(); // close popup
+    } else {
+      alert(data.message); // shows API error messages
+    }
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-
       {/* Overlay */}
       <div
         className="absolute inset-0 bg-black/40 backdrop-blur-sm"
@@ -48,10 +54,7 @@ export default function LoginPopup({
       {/* Modal */}
       <div className="relative w-full max-w-md bg-white p-8 rounded-2xl shadow-xl border border-[#6D1B1C]/20 z-10">
 
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-[#6D1B1C]"
-        >
+        <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-[#6D1B1C]">
           <FaTimes />
         </button>
 
@@ -63,37 +66,25 @@ export default function LoginPopup({
 
           {/* Email */}
           <div>
-            <label className="block text-sm text-gray-700 mb-1">
-              Email Address
-            </label>
-
+            <label className="block text-sm text-gray-700 mb-1">Email Address</label>
             <input
               type="email"
               value={email}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setEmail(e.target.value)
-              }
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-3 rounded-lg bg-[#FDF4E2] border border-gray-300"
             />
           </div>
 
           {/* Password */}
           <div>
-            <label className="block text-sm text-gray-700 mb-1">
-              Password
-            </label>
-
+            <label className="block text-sm text-gray-700 mb-1">Password</label>
             <div className="relative">
-
               <input
                 type={showPassword ? "text" : "password"}
                 value={password}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setPassword(e.target.value)
-                }
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-3 pr-12 rounded-lg bg-[#FDF4E2] border border-gray-300"
               />
-
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
@@ -101,25 +92,19 @@ export default function LoginPopup({
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
-
             </div>
           </div>
 
-          {/* Login Button */}
           <button className="w-full mt-4 px-6 py-3 rounded-lg bg-[#6D1B1C] text-white font-semibold">
             Sign In
           </button>
 
         </form>
 
-        {/* Switch to Signup */}
         <p className="text-center text-sm text-gray-600 mt-6">
           Don’t have an account?
           <span
-            onClick={() => {
-              onClose();
-              onSwitchToSignup();
-            }}
+            onClick={() => { onClose(); onSwitchToSignup(); }}
             className="text-[#6D1B1C] font-semibold cursor-pointer ml-1"
           >
             Sign Up
@@ -129,5 +114,4 @@ export default function LoginPopup({
       </div>
     </div>
   );
-
 }

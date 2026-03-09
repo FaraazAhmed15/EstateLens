@@ -4,7 +4,7 @@ import mysql from "mysql2/promise";
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { name, email, message } = body;
+    const { name, email, phone, message } = body; // ADDED phone
 
     // VALIDATION
     if (!name || name.trim() === "") {
@@ -17,6 +17,14 @@ export async function POST(req) {
     if (!email || !/\S+@\S+\.\S+/.test(email)) {
       return NextResponse.json(
         { success: false, error: "Valid email is required" },
+        { status: 400 }
+      );
+    }
+
+    // ADDED PHONE VALIDATION
+    if (!phone || !/^[0-9]{10}$/.test(phone)) {
+      return NextResponse.json(
+        { success: false, error: "Valid phone number is required" },
         { status: 400 }
       );
     }
@@ -38,8 +46,8 @@ export async function POST(req) {
 
     // INSERT DATA
     await db.execute(
-      "INSERT INTO contacts (name,email,message) VALUES (?,?,?)",
-      [name, email, message]
+      "INSERT INTO contacts (name,email,phone,message) VALUES (?,?,?,?)",
+      [name, email, phone, message]
     );
 
     return NextResponse.json({

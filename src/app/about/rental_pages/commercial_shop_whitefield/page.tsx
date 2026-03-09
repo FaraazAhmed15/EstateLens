@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation"; 
+import { getSession } from "@/lib/session"; 
 import Link from "next/link";
 import {
   FaMapMarkerAlt,
@@ -22,7 +24,7 @@ import {
 
 export default function CommercialShopWhitefield() {
   const [message, setMessage] = useState("");
-
+   
   return (
     <section className="max-w-6xl mx-auto px-6 mt-16 mb-20">
 
