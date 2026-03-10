@@ -1,6 +1,8 @@
 "use client";
 import WishlistButton from "@/components/WishlistButton";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation"; 
+import { getSession } from "@/lib/session"; 
 import Link from "next/link";
 import {
   FaMapMarkerAlt,
@@ -26,6 +28,85 @@ import {
 
 export default function MysuruVilla() {
   const [message, setMessage] = useState("");
+  
+
+const pathname = usePathname(); 
+const [userName, setUserName] = useState<string | null>(null);
+const [ownerNumber, setOwnerNumber] = useState(null);
+
+  useEffect(() => { // ADD check login
+    const name = getSession();
+    setUserName(name);
+  }, []);
+
+
+
+  // ADD → get owner number from database
+  const handleRequestNumber = async () => {
+
+    if (!userName) {
+      alert("Please login to get owner number.");
+      return;
+    }
+
+    const res = await fetch("/api/owner/getOwnerNumber", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        page_path: pathname, // matches SQL page_path
+      }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      setOwnerNumber(data.number); // number from SQL
+    } else {
+      alert(data.message);
+    }
+  };
+
+
+
+  // ADD → send message to database
+  const handleSendMessage = async () => {
+
+    if (!userName) {
+      alert("Please login to send message.");
+      return;
+    }
+
+    if (!message.trim()) {
+      alert("Message cannot be empty");
+      return;
+    }
+
+    const res = await fetch("/api/owner/sendMessage", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message,
+        page_path: pathname,
+        userName,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert("Message sent successfully!");
+      setMessage("");
+    } else {
+      alert(data.message);
+    }
+  };
+
+
+
 
   return (
     <section className="max-w-6xl mx-auto px-6 mt-16 mb-20">
@@ -83,8 +164,19 @@ export default function MysuruVilla() {
 
             {/* buttons */}
             <div className="mt-6 space-y-4">
-              <button className="flex items-center gap-2 bg-[#6D1B1C] text-white px-6 py-2 rounded-md hover:bg-[#541516] transition">
-                <FaPhoneAlt /> Request Owner Number
+              <button
+                onClick={handleRequestNumber} // ADD
+                disabled={!userName} // ADD
+                className={`px-6 py-2 rounded-md
+                ${userName
+                  ? "bg-[#6D1B1C] text-white"
+                  : "bg-gray-300 cursor-not-allowed"
+                }`}
+              >
+
+                {/* show number after fetching */}
+                {ownerNumber ? ownerNumber : "Request Owner Number"}
+
               </button>
 
               <div className="flex gap-4">
@@ -186,8 +278,15 @@ export default function MysuruVilla() {
         />
 
         <div className="flex gap-4 mt-4">
-                    <button
-            className="flex items-center gap-2 bg-[#6D1B1C] text-white px-8 py-2 rounded-md hover:bg-[#541516] transition">
+          <button
+            onClick={handleSendMessage} // ADD
+            disabled={!userName} // ADD
+            className={`flex items-center gap-2 px-6 py-2 rounded-md
+            ${userName
+              ? "bg-[#6D1B1C] text-white"
+              : "bg-gray-300 cursor-not-allowed"
+            }`}
+          >
             <FaPaperPlane /> Send Message
           </button>
 

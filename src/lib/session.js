@@ -16,3 +16,8 @@ export function logout() {
     localStorage.removeItem("userName");
   }
 }
+
+// Check if user is logged in
+export function isLoggedIn() {
+  return getSession() !== null;
+}
