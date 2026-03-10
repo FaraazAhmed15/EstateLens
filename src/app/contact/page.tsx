@@ -7,17 +7,22 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",   // ADDED
+    phone: "",
     message: "",
   });
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
+  // ADDED: common change handler to remove error
+  const handleChange = (field: string, value: string) => {
+    setFormData({ ...formData, [field]: value });
+    setError("");       // remove error when typing
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Run validation
     const errors = validateContact(formData);
 
     if (Object.keys(errors).length > 0) {
@@ -48,7 +53,7 @@ export default function ContactPage() {
     setFormData({
       name: "",
       email: "",
-      phone: "",   // ADDED
+      phone: "",
       message: "",
     });
   };
@@ -77,9 +82,7 @@ export default function ContactPage() {
             type="text"
             placeholder="Full Name"
             value={formData.name}
-            onChange={(e) =>
-              setFormData({ ...formData, name: e.target.value })
-            }
+            onChange={(e) => handleChange("name", e.target.value)}
             className="w-full px-4 py-3 rounded-lg border"
           />
 
@@ -87,20 +90,15 @@ export default function ContactPage() {
             type="email"
             placeholder="Email"
             value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
+            onChange={(e) => handleChange("email", e.target.value)}
             className="w-full px-4 py-3 rounded-lg border"
           />
 
-          {/* ADDED PHONE INPUT */}
           <input
             type="tel"
             placeholder="Phone Number"
             value={formData.phone}
-            onChange={(e) =>
-              setFormData({ ...formData, phone: e.target.value })
-            }
+            onChange={(e) => handleChange("phone", e.target.value)}
             className="w-full px-4 py-3 rounded-lg border"
           />
 
@@ -108,9 +106,7 @@ export default function ContactPage() {
             rows={4}
             placeholder="Message"
             value={formData.message}
-            onChange={(e) =>
-              setFormData({ ...formData, message: e.target.value })
-            }
+            onChange={(e) => handleChange("message", e.target.value)}
             className="w-full px-4 py-3 rounded-lg border"
           />
 

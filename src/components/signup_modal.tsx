@@ -28,11 +28,13 @@ export default function SignupModal({
 }: SignupModalProps) {
 
   const [showPassword, setShowPassword] = useState(false);
+
   const [form, setForm] = useState<SignupForm>({
     name: "",
     email: "",
     password: "",
   });
+
   const [errors, setErrors] = useState<SignupErrors>({});
   const [loading, setLoading] = useState(false);
 
@@ -40,7 +42,18 @@ export default function SignupModal({
 
   // Handle input change
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    // Remove error when user types
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "",
+    }));
   };
 
   // Handle form submit
@@ -48,6 +61,7 @@ export default function SignupModal({
     e.preventDefault();
 
     const validationErrors = validateSignup(form);
+
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
@@ -58,17 +72,27 @@ export default function SignupModal({
 
       const res = await fetch("/api/signup", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(form),
       });
 
       const data = await res.json();
 
-      if (!res.ok) alert(data.message);
-      else {
+      if (!res.ok) {
+        alert(data.message);
+      } else {
         alert("Signup Successful");
+        setForm({
+          name: "",
+          email: "",
+          password: "",
+        });
+        setErrors({});
         onClose();
       }
+
     } catch (err) {
       console.error(err);
       alert("Something went wrong");
@@ -79,16 +103,31 @@ export default function SignupModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
 
+      {/* Background */}
+      <div
+        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+        onClick={onClose}
+      />
+
+      {/* Modal */}
       <div className="relative w-full max-w-md bg-white p-8 rounded-2xl shadow-xl z-10">
-        <button onClick={onClose} className="absolute top-4 right-4 text-gray-500">
+
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-500"
+        >
           <FaTimes />
         </button>
 
-        <h1 className="text-2xl font-bold text-center mb-6">Create an Account</h1>
+        <h1 className="text-2xl font-bold text-center mb-6">
+          Create an Account
+        </h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
+
+          {/* Name */}
           <div>
             <input
               type="text"
@@ -98,9 +137,12 @@ export default function SignupModal({
               onChange={handleChange}
               className="w-full px-4 py-3 border rounded-lg"
             />
-            {errors.name && <p className="text-red-500 text-xs">{errors.name}</p>}
+            {errors.name && (
+              <p className="text-red-500 text-xs">{errors.name}</p>
+            )}
           </div>
 
+          {/* Email */}
           <div>
             <input
               type="email"
@@ -110,9 +152,12 @@ export default function SignupModal({
               onChange={handleChange}
               className="w-full px-4 py-3 border rounded-lg"
             />
-            {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
+            {errors.email && (
+              <p className="text-red-500 text-xs">{errors.email}</p>
+            )}
           </div>
 
+          {/* Password */}
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
@@ -122,6 +167,7 @@ export default function SignupModal({
               onChange={handleChange}
               className="w-full px-4 py-3 border rounded-lg"
             />
+
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
@@ -129,9 +175,13 @@ export default function SignupModal({
             >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
-            {errors.password && <p className="text-red-500 text-xs">{errors.password}</p>}
+
+            {errors.password && (
+              <p className="text-red-500 text-xs">{errors.password}</p>
+            )}
           </div>
 
+          {/* Submit */}
           <button
             type="submit"
             disabled={loading}
@@ -139,17 +189,23 @@ export default function SignupModal({
           >
             {loading ? "Creating..." : "Sign Up"}
           </button>
+
         </form>
 
+        {/* Login switch */}
         <p className="text-center text-sm mt-4">
           Already have an account?
           <span
-            onClick={() => { onClose(); onSwitchToLogin(); }}
+            onClick={() => {
+              onClose();
+              onSwitchToLogin();
+            }}
             className="text-[#6D1B1C] cursor-pointer ml-1"
           >
             Login
           </span>
         </p>
+
       </div>
     </div>
   );
