@@ -7,42 +7,43 @@ export default function FeedbackPage() {
   const [feedback, setFeedback] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-const handleSubmit = async () => {
+  const handleSubmit = async () => {
 
-  if(feedback.trim() === "") return;
+    if (feedback.trim() === "") return;
 
-  try{
+    try {
 
-    const userName = getSession();
+      const userName = getSession();
 
-    const response = await fetch("/api/feedback",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body: JSON.stringify({
-        userName,
-        message: feedback
-      })
-    });
+      const response = await fetch("/api/feedback", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          userName,
+          message: feedback
+        })
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if(data.success){
-      setSubmitted(true);
-      setFeedback("");
-    }else{
-      alert("Error submitting feedback");
+      if (data.success) {
+        setSubmitted(true);
+        setFeedback("");
+      } else {
+        alert("Error submitting feedback");
+      }
+
+    } catch (error) {
+      console.error(error);
+      alert("Server error");
     }
 
-  }catch(error){
-    console.error(error);
-    alert("Server error");
-  }
+  };
 
-};
   return (
-    <div className="min-h-screen bg-[#1CA7A6] flex items-center justify-center px-6 py-16">
+    <div className="min-h-screen bg-[#FFF8E7] flex items-center justify-center px-6 py-16">
 
       <div className="bg-white w-full max-w-2xl rounded-3xl shadow-xl p-10">
 
@@ -79,4 +80,3 @@ const handleSubmit = async () => {
     </div>
   );
 }
-

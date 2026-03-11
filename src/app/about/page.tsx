@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -7,7 +6,6 @@ import Footer from "@/components/Footer";
 import {
   FaBuilding,
   FaNewspaper,
-  FaSignInAlt,
   FaHome,
   FaKey,
 } from "react-icons/fa";
@@ -18,7 +16,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-[#EDEDED] text-[#2E2E2E] overflow-x-hidden">
 
-      {/* Top Navbar (More Visible Now) */}
+      {/* Top Navbar */}
       <nav className="flex justify-between items-center px-12 py-6 bg-white shadow-md border-b border-gray-300">
         <div>
           <h1 className="text-2xl font-bold text-[#8B6F47]">
@@ -33,9 +31,6 @@ export default function AboutPage() {
           </a>
           <a href="/market_insight" className="hover:text-[#8B6F47] flex items-center gap-2 transition">
             <FaNewspaper /> Market Insight
-          </a>
-          <a href="/sign_up" className="hover:text-[#8B6F47] flex items-center gap-2 transition">
-            <FaSignInAlt /> Sign Up
           </a>
           <a href="/building_plan" className="hover:text-[#8B6F47] flex items-center gap-2 transition">
             <FaHome /> Building Plan
@@ -74,7 +69,7 @@ export default function AboutPage() {
         {/* About & Mission Side by Side */}
         <div className="grid md:grid-cols-2 gap-12">
 
-          {/* About Content (Left) */}
+          {/* About Content */}
           <div className="bg-white p-12 rounded-3xl shadow-lg">
             <p className="text-xl leading-relaxed">
               EstateLens is a web-based real estate discovery platform developed as an academic project.
@@ -90,7 +85,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* Mission Content (Right) */}
+          {/* Mission Content */}
           <div className="bg-[#8B6F47] text-white p-12 rounded-3xl shadow-lg">
             <h2 className="text-4xl font-extrabold mb-8 text-center">
               Our Mission
@@ -159,4 +154,3 @@ export default function AboutPage() {
     </div>
   );
 }
-
