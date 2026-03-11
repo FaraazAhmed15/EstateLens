@@ -15,13 +15,16 @@ import {
 
 import SignupPopup from "@/components/signup_modal";
 import LoginPopup from "@/components/login_popup";
+import { logout } from "@/lib/session"; // import logout function to clear session on logout
 
 export default function Navbar() {
   const [openSignup, setOpenSignup] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
 
   const handleLogout = () => {
+    logout(); // remove session
     alert("Logged out successfully");
+    window.location.reload(); // reload so new user can login
   };
 
   return (
