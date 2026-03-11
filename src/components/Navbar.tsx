@@ -9,7 +9,8 @@ import {
   FaPhone,
   FaSignInAlt,
   FaUserPlus,
-  FaHeart
+  FaHeart,
+  FaSignOutAlt
 } from "react-icons/fa";
 
 import SignupPopup from "@/components/signup_modal";
@@ -18,6 +19,10 @@ import LoginPopup from "@/components/login_popup";
 export default function Navbar() {
   const [openSignup, setOpenSignup] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
+
+  const handleLogout = () => {
+    alert("Logged out successfully");
+  };
 
   return (
     <>
@@ -31,16 +36,30 @@ export default function Navbar() {
 
           {/* MENU */}
           <nav className="hidden md:flex items-center gap-8 text-[16px] font-medium">
-            <Link href="/" className="hover:text-[#7A1F2B] flex gap-2"><FaHome />Home</Link>
-            <Link href="/home-user-subscribed/home-user-subscribed-properties" className="hover:text-[#7A1F2B] flex gap-2"><FaBuilding />Properties</Link>
-            <Link href="/about" className="hover:text-[#7A1F2B] flex gap-2"><FaInfoCircle />About</Link>
-            <Link href="/contact" className="hover:text-[#7A1F2B] flex gap-2"><FaPhone />Contact</Link>
+            <Link href="/" className="hover:text-[#7A1F2B] flex gap-2">
+              <FaHome /> Home
+            </Link>
+
+            <Link
+              href="/home-user-subscribed/home-user-subscribed-properties"
+              className="hover:text-[#7A1F2B] flex gap-2"
+            >
+              <FaBuilding /> Properties
+            </Link>
+
+            <Link href="/about" className="hover:text-[#7A1F2B] flex gap-2">
+              <FaInfoCircle /> About
+            </Link>
+
+            <Link href="/contact" className="hover:text-[#7A1F2B] flex gap-2">
+              <FaPhone /> Contact
+            </Link>
           </nav>
 
-          {/* BUTTONS */}
-          <div className="flex items-center gap-4">
+          {/* RIGHT SIDE BUTTONS */}
+          <div className="flex items-center gap-5">
 
-            {/* WISHLIST BUTTON */}
+            {/* WISHLIST */}
             <Link
               href="/wishlist"
               className="text-[#0F2A44] font-medium hover:text-[#7A1F2B] flex gap-2"
@@ -49,14 +68,25 @@ export default function Navbar() {
               Wishlist
             </Link>
 
+            {/* LOGIN */}
             <button
               onClick={() => setOpenLogin(true)}
               className="text-[#0F2A44] font-medium hover:text-[#7A1F2B] flex gap-2"
             >
               <FaSignInAlt />
-              Log In
+              Login
             </button>
 
+            {/* LOGOUT */}
+            <button
+              onClick={handleLogout}
+              className="text-[#0F2A44] font-medium hover:text-red-600 flex gap-2"
+            >
+              <FaSignOutAlt />
+              Logout
+            </button>
+
+            {/* SIGNUP */}
             <button
               onClick={() => setOpenSignup(true)}
               className="bg-[#7A1F2B] text-white px-5 py-2 rounded-full shadow hover:bg-[#5e1821] flex gap-2"
