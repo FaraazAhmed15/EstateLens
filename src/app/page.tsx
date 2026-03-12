@@ -63,7 +63,7 @@ export default function HomePage() {
           <div className="flex gap-6 justify-center mb-6 text-lg font-medium flex-wrap">
             <Link href="/home-user-subscribed/home-user-subscribed-properties" className="hover:underline">Buy</Link>
             <Link href="/home-user-subscribed/home-user-subscribed-properties" className="hover:underline">Rent</Link>
-            <Link href="/sell" className="hover:underline">Sell</Link>
+            <Link href="/list_property" className="hover:underline">Sell</Link>
             <Link href="/pre-approval" className="hover:underline">Pre-approval</Link>
             <Link href="/market_insight" className="hover:underline">market Insight</Link>
             <Link href="/building_plan" className="hover:underline">Home Plan</Link>

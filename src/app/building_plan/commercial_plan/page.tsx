@@ -22,57 +22,9 @@ export default function Commercial_Plan_Page() {
 
   return (
     <div className="flex min-h-screen">
-      {/* LEFT FIXED PANEL */}
-      <div
-        className="w-[360px] h-screen fixed left-0 top-0
-                   bg-[#F4F1EC] border-r border-[#B8A47C]
-                   flex flex-col items-center px-6 py-8"
-      >
-        {/* Left Logo */}
-        <div className="bg-[#F4F1EC] p-4 rounded-lg">
-          <img
-            src="/images/logo.jpeg"
-            alt="EstateLens Logo"
-            className="w-32 mx-auto"/>
-        </div>
-        <h1 className="text-xl font-bold text-[#6D1B1C]">
-          <strong>EstateLens</strong>
-        </h1>
-        <p className="text-sm text-[#1F3A2E]">See Property Clearly</p>
-
-        {/* LEFT MENU BOX */}
-        <div className="w-full mt-12 border border-[#B8A47C] rounded-lg overflow-hidden bg-[#F4F1EC] z-10">
-          {[
-            { name: "Properties", href: "/properties", icon: <FaBuilding /> },
-            { name: "Market Insight", href: "/market_insight", icon: <FaNewspaper /> },
-            { name: "Sign Up", href: "/sign_up", icon: <FaSignInAlt /> },
-            { name: "About", href: "/about", icon: <FaInfoCircle /> },
-            { name: "Building Plan", href: "/building_plan", icon: <FaHome /> },
-            { name: "Logins", action: "login", icon: <FaKey /> },
-            { name: "List Property", href: "/list_property", icon: <FaCity /> },
-          ].map((item, index) => (
-            <a
-              key={index}
-              href={item.href}
-              onClick={
-                item.action === "login" ? () => setShowLoginModal(true) : undefined
-              }
-              className="group flex items-center gap-3 px-4 py-3 
-                         border-t border-[#B8A47C]
-                         text-[#1F3A2E]
-                         hover:bg-[#6D1B1C] hover:text-white
-                         transition">
-              <span className="text-lg text-[#6D1B1C] group-hover:text-white">
-                {item.icon}
-              </span>
-              <span className="font-medium">{item.name}</span>
-            </a>
-          ))}
-        </div>
-      </div>
-
+     
       {/* RIGHT CONTENT AREA */}
-<div className="flex-1 ml-[360px] relative bg-[#F4F1EC] overflow-y-auto">
+<div className="flex-1 relative bg-[#F4F1EC] overflow-y-auto">
 
   {/* CURVED IMAGE HEADER */}
   <div className="absolute top-0 left-0 w-full h-[90px] overflow-hidden">

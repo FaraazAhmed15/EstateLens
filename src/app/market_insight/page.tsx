@@ -1,580 +1,319 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, ReactNode } from "react";
 import Link from "next/link";
-import type { Metadata } from "next";
 import LoginModal from "@/components/LoginModal";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PriceCalculator from "@/components/PriceCalculator";
-import PersonalizedMap from "@/components/PersonalizedMap"; 
+import PersonalizedMap from "@/components/PersonalizedMap";
 import {
   FaHome,
-  FaInfoCircle,
-  FaBuilding,
-  FaCity,
-  FaNewspaper,
-  FaSignInAlt,
-  FaKey,
+  FaChartBar,
+  FaMapMarkedAlt,
+  FaCalculator,
+  FaUserTie,
+  FaChevronRight,
 } from "react-icons/fa";
 
+type SidebarItemProps = {
+  icon: ReactNode;
+  label: string;
+  onClick: () => void;
+};
 
+type InsightSectionProps = {
+  id: string;
+  title: string;
+  text: string;
+  img: string;
+  reverse?: boolean;
+};
 
 export default function Market_Insight_Page() {
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollTo = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   return (
-    <div className="flex min-h-screen">
-      {/* left panel*/}
-      <div
-        className="w-[360px] h-screen fixed left-0 top-0
-                   bg-[#F4F1EC] border-r border-[#B8A47C]
-                   flex flex-col items-center px-6 py-8"
-      >
-        {/* Left Logo */}
-        <div className="bg-[#F4F1EC] p-4 rounded-lg">
-          <img
-            src="/images/logo.jpeg"
-            alt="EstateLens Logo"
-            className="w-32 mx-auto"/>
-        </div>
-        <h1 className="text-xl font-bold text-[#6D1B1C]">
-          <strong>EstateLens</strong>
-        </h1>
-        <p className="text-sm text-[#1F3A2E]">See Property Clearly</p>
+    <div className="min-h-screen bg-[#FDFBF7] text-[#1F3A2E] selection:bg-[#6D1B1C] selection:text-white">
 
-        {/* left menu */}
-        <div className="w-full mt-12 border border-[#B8A47C] rounded-lg overflow-hidden bg-[#F4F1EC] z-10">
-          {[
-            { name: "Properties", href: "/properties", icon: <FaBuilding /> },
-            { name: "Market Insight", href: "/market_insight", icon: <FaNewspaper /> },
-            { name: "Sign Up", href: "/sign_up", icon: <FaSignInAlt /> },
-            { name: "About", href: "/about", icon: <FaInfoCircle /> },
-            { name: "Building Plan", href: "/building_plan", icon: <FaHome /> },
-            { name: "Logins", action: "login", icon: <FaKey /> },
-          ].map((item, index) => (
-            <a
-              key={index}
-              href={item.href}
-              onClick={
-                item.action === "login" ? () => setShowLoginModal(true) : undefined
-              }
-              className="group flex items-center gap-3 px-4 py-3 
-                         border-t border-[#B8A47C]
-                         text-[#1F3A2E]
-                         hover:bg-[#6D1B1C] hover:text-white
-                         transition">
-              <span className="text-lg text-[#6D1B1C] group-hover:text-white">
-                {item.icon}
-              </span>
-              <span className="font-medium">{item.name}</span>
-            </a>
-          ))}
-        </div>
-      </div>
+      {/* Sidebar */}
+      <aside className="fixed left-8 top-1/2 -translate-y-1/2 z-50 hidden lg:block">
+        <div className="flex flex-col items-center gap-4 p-4 bg-white/40 backdrop-blur-xl border border-white/20 rounded-3xl shadow-[0_8px_32px_0_rgba(109,27,28,0.08)]">
 
-      {/* right part */}
-<div className="flex-1 ml-[360px] relative bg-[#F4F1EC] overflow-y-auto">
+          <div className="flex flex-col gap-2 mb-4">
+            <button
+              onClick={() => window.history.back()}
+              className="w-12 h-10 flex items-center justify-center text-[#6D1B1C] hover:bg-[#6D1B1C] hover:text-white rounded-xl transition-all duration-300 border border-[#6D1B1C]/20 group"
+            >
+              <FaChevronRight
+                className="rotate-180 group-hover:-translate-x-1 transition-transform"
+                size={14}
+              />
+            </button>
 
-  {/* sturcture design*/}
-  <div className="absolute top-0 left-0 w-full h-[90px] overflow-hidden">
-    <svg
-      viewBox="0 0 1000 100"
-      preserveAspectRatio="none"
-      className="w-full h-full">
-      <defs>
-        <clipPath id="curveClip">
-          <path
-            d="M194,99c186.7,0.7,305-78.3,306-97.2c1,18.9,119.3,97.9,306,97.2
-               c114.3-0.3,194,0.3,194,0.3s0-91.7,0-100L0,0v99.3
-               C0,99.3,79.7,98.7,194,99z"/>
-        </clipPath>
-      </defs>
-
-      <image
-        href="/images/red_flower.jpeg"
-        width="100%"
-        height="100%"
-        preserveAspectRatio="xMidYMid slice"
-        clipPath="url(#curveClip)"
-      />
-    </svg>
-  </div>
-
-  {/* page content */}
-  <div className="pt-[120px] p-8">
-    <h1 className="text-5xl font-bold mb-4 text-center text-[#6D1B1C]" style={{ fontFamily: "'Sanchez', serif" }}>Market Insight</h1>
-      <h1 className="text-xl font-bold text-center text-[#6D1B1C]" style={{ fontFamily: "'Sanchez', serif" }}>Where your future takes flight</h1>
-
-    <div className="mt-10 text-[#1F3A2E] ml-14">
-    <p className="text-lg md:text-xl" style={{ fontFamily: "'Lato',serif" }}>
-      Market Insight at EstateLens provides <strong>data-driven analysis </strong>to help users understand real estate trends with
-      clarity. From pricing movements and demand patterns to location-wise growth insights, this section is designed
-      to support informed property decisions for <strong>buyers, investors and developers.</strong>
-      
-    </p>
-    </div>
-    
-{/* market insight highlights */}
-<section className="mt-20 mb-24">
-  <div className="max-w-6xl mx-auto px-4">
-
-    <h2
-      className="text-3xl font-bold text-center text-[#6D1B1C] mb-14"
-      style={{ fontFamily: "'Sanchez', serif" }}
-    >
-      Market Insight Highlights
-    </h2>
-
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-
-      {[
-        {
-          id: "price-trend",
-          title: "Price Trend",
-          img: "/images/market_growth.jpeg",
-          text: "Property prices have grown 8–12% year-on-year in major urban markets."
-        },
-        {
-          id: "high-growth",
-          title: "High-Growth Areas",
-          img: "/images/market_high_growth.jpeg",
-          text: "IT corridors and emerging zones show strong appreciation potential."
-        },
-        {
-          id: "rental-yield",
-          title: "Rental Yield",
-          img: "/images/market_rental_yield.jpeg",
-          text: "Rental returns typically average between 3–5%, with the exact yield varying based on locality "
-        },
-        {
-          id: "demand-pattern",
-          title: "Demand Pattern",
-          img: "/images/demand_pattern.jpeg",
-          text: "2 and 3 BHK homes dominate buyer demand, offering the right mix of affordability and space."
-        }
-      ].map((item, index) => (
-        <a
-          key={index}
-          href={`#${item.id}`}
-          className="group"
-        >
-          <div
-            className="bg-[#FDF4E2] border border-[#B8A47C] rounded-xl overflow-hidden
-                       shadow-sm transition-all duration-300
-                       hover:-translate-y-1 hover:shadow-lg">
-            {/* image */}
-            <div className="h-[120px] overflow-hidden">
-              <img
-                src={item.img}
-                alt={item.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition duration-300"/>
-            </div>
-
-            {/* content */}
-            <div className="p-6 text-center">
-              <h4
-                className="font-semibold text-[#6D1B1C] mb-2"
-                style={{ fontFamily: "'Sanchez', serif" }}
-              >
-                {item.title}
-              </h4>
-              <p
-                className="text-sm text-[#1F3A2E]"
-                style={{ fontFamily: "'Lato', serif" }}
-              >
-                {item.text}
-              </p>
-            </div>
+            <Link href="/">
+              <div className="w-12 h-12 bg-[#6D1B1C] rounded-2xl flex items-center justify-center shadow-lg shadow-[#6D1B1C]/20 cursor-pointer hover:scale-105 active:scale-95 transition-all">
+                <span className="text-white font-serif font-bold text-2xl">
+                  E
+                </span>
+              </div>
+            </Link>
           </div>
-        </a>
-      ))}
 
-    </div>
-  </div>
-</section>
+          <div className="flex flex-col gap-1">
+            <SidebarItem
+              icon={<FaHome size={18} />}
+              label="Overview"
+              onClick={() =>
+                window.scrollTo({ top: 0, behavior: "smooth" })
+              }
+            />
 
+            <SidebarItem
+              icon={<FaChartBar size={18} />}
+              label="Market Trends"
+              onClick={() => scrollTo("price-trend")}
+            />
 
+            <SidebarItem
+              icon={<FaMapMarkedAlt size={18} />}
+              label="Heatmaps"
+              onClick={() => scrollTo("insights1")}
+            />
 
-{/* section */}
-<section className="mt-24 mb-24">
-  <div className="max-w-6xl mx-auto px-4">
+            <SidebarItem
+              icon={<FaCalculator size={18} />}
+              label="Estimator"
+              onClick={() => scrollTo("calculator")}
+            />
+          </div>
+        </div>
+      </aside>
 
-    <div className="bg-[#FDF4E2] border border-[#B8A47C] rounded-2xl p-10 shadow-md">
+      {/* Hero */}
+      <header className="relative h-[70vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-[#6D1B1C]/10 to-transparent z-10" />
 
-      {/* Heading */}
-      <h2
-        className="text-3xl font-bold text-center text-[#6D1B1C] mb-4"
-        style={{ fontFamily: "'Sanchez', serif" }}
-      >
-        Ready to Make Smarter Property Decisions?
-      </h2>
+          <img
+            src="/images/red_flower.jpeg"
+            className="w-full h-full object-cover opacity-30 grayscale hover:grayscale-0 transition-all duration-1000 scale-105"
+            alt="EstateLens Background"
+          />
+        </div>
 
-      {/* Subtext */}
-      <p
-        className="text-center text-[#1F3A2E] max-w-3xl mx-auto mb-10"
-        style={{ fontFamily: "'Lato', serif" }}
-      >
-        Leverage real-time market insights, verified data, and expert guidance
-        to confidently choose properties that align with your goals.
-      </p>
+        <div className="relative z-20 text-center px-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 text-[10px] font-bold tracking-[0.4em] uppercase bg-white border border-[#B8A47C]/30 text-[#6D1B1C] rounded-full shadow-sm">
+            <span className="w-2 h-2 bg-[#6D1B1C] rounded-full animate-pulse" />
+            Live Market Intelligence
+          </div>
 
-      {/* buttons */}
-      
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <h1
+            className="text-6xl md:text-9xl font-bold text-[#6D1B1C] mb-6 tracking-tighter"
+            style={{ fontFamily: "'Sanchez', serif" }}
+          >
+            Market <span className="text-[#A66E3A]">Insight</span>
+          </h1>
 
-        <Link
-  href="/properties"
-  className="group bg-[#6D1B1C] text-white rounded-xl p-6
-             hover:bg-[#541516] transition-all duration-300
-             flex flex-col items-center gap-2 text-center"
->
-  <span className="text-lg font-semibold">
-    Explore Properties
-  </span>
-  <span className="text-sm opacity-90">
-    Browse by location & property type
-  </span>
-</Link>
+          <p className="text-xl md:text-2xl font-light max-w-2xl mx-auto text-[#1F3A2E]/80 leading-relaxed">
+            Data-driven clarity for the modern real estate landscape.
+          </p>
+        </div>
+      </header>
 
-        <button
-  onClick={() => {
-    document
-      .getElementById("calculator")
-      ?.scrollIntoView({ behavior: "smooth" });
-  }}
-  className="group bg-[#6D1B1C] text-white rounded-xl p-6 hover:bg-[#541516]"
->
-  <div className="flex flex-col items-center gap-2">
-    <span className="text-lg font-semibold">Calculate Your Budget</span>
-    <span className="text-sm opacity-90">Estimate EMI & affordability</span>
-  </div>
-</button>
+      {/* Main */}
+      <main className="max-w-7xl mx-auto px-8 lg:pl-32 pb-24">
 
-        <button
-  onClick={() => {
-    document
-      .getElementById("insights")
-      ?.scrollIntoView({ behavior: "smooth" });
-  }}
-  className="group bg-[#6D1B1C] text-white rounded-xl p-6
-             hover:bg-[#541516] transition-all duration-300"
->
-  <div className="flex flex-col items-center gap-2 text-center">
-    <span className="text-lg font-semibold">
-      Personalized Insights
-    </span>
-    <span className="text-sm opacity-90">
-      Market trends tailored to you
-    </span>
-  </div>
-</button>
+        {/* Section */}
+        <section className="grid lg:grid-cols-2 gap-16 py-24 border-b border-[#B8A47C]/20">
 
-        <button
-  onClick={() => {
-    document
-      .getElementById("expert")
-      ?.scrollIntoView({ behavior: "smooth" });
-  }}
-  className="group bg-[#6D1B1C] text-white rounded-xl p-6 hover:bg-[#541516] transition-all"
->
-  <div className="flex flex-col items-center gap-2">
-    <span className="text-lg font-semibold">Talk to an Expert</span>
-    <span className="text-sm opacity-90">
-      Get clarity before you decide
-    </span>
-  </div>
-</button>
-      </div>
+          <div>
+            <h2
+              className="text-5xl font-bold text-[#6D1B1C] leading-tight mb-8"
+              style={{ fontFamily: "'Sanchez', serif" }}
+            >
+              The Edge of Property Analytics
+            </h2>
 
-    </div>
-  </div>
-</section>
-<section id="price-trend" className="mt-24">
-  <div className="max-w-6xl mx-auto bg-[#FDF4E2] rounded-xl p-10 shadow-md">
+            <p className="text-xl text-[#1F3A2E]/70 leading-relaxed mb-6">
+              EstateLens provides <strong>data-driven analysis</strong> to help
+              users understand real estate trends with clarity.
+            </p>
 
-    <h3
-      className="text-2xl font-bold text-[#6D1B1C] mb-6"
-      style={{ fontFamily: "'Sanchez', serif" }}
-    >
-      Average Property Price Trend
-    </h3>
+            <button
+              onClick={() => scrollTo("insights1")}
+              className="flex items-center gap-2 bg-[#6D1B1C] text-white px-6 py-3 rounded-xl hover:bg-[#541516]"
+            >
+              Explore Maps <FaChevronRight size={12} />
+            </button>
+          </div>
 
-    <p className="text-[#1F3A2E] leading-relaxed mb-4">
-      Over the past few years, property prices across major Indian cities have
-      shown consistent upward movement. Urban centers driven by employment,
-      infrastructure development, and connectivity have recorded steady
-      appreciation.
-    </p>
+          <div className="grid grid-cols-2 gap-4">
+            {[
+              { id: "price-trend", title: "Price Trend", val: "+12%" },
+              { id: "high-growth", title: "Growth Areas", val: "IT Hubs" },
+              { id: "rental-yield", title: "Rental Yield", val: "4.8%" },
+              { id: "demand-pattern", title: "Demand", val: "3 BHK" },
+            ].map((card) => (
+              <div
+                key={card.id}
+                onClick={() => scrollTo(card.id)}
+                className="p-8 rounded-3xl border border-[#B8A47C]/20 shadow-sm hover:shadow-xl cursor-pointer"
+              >
+                <h4 className="text-[10px] uppercase tracking-widest font-bold text-[#A66E3A] mb-2">
+                  {card.title}
+                </h4>
 
-    <p className="text-[#1F3A2E] leading-relaxed">
-      Markets such as Bengaluru, Hyderabad, and Pune have witnessed average
-      year-on-year price growth between <strong>8% and 12%</strong>, making
-      real estate a stable long-term investment option.
-    </p>
+                <div className="text-3xl font-bold text-[#6D1B1C]">
+                  {card.val}
+                </div>
+              </div>
+            ))}
+          </div>
 
-  </div>
-</section>
+        </section>
 
+        {/* Insight Sections */}
+        <section className="space-y-24 py-24">
 
-<section id="high-growth" className="mt-24">
-  <div className="max-w-6xl mx-auto bg-white border border-[#B8A47C] rounded-xl p-10 shadow-sm">
+          <InsightSection
+            id="price-trend"
+            title="Property Price Movement"
+            text="Urban centers driven by employment and infrastructure have recorded steady appreciation."
+            img="/images/market_growth.jpeg"
+          />
 
-    <h3
-      className="text-2xl font-bold text-[#6D1B1C] mb-6"
-      style={{ fontFamily: "'Sanchez', serif" }}
-    >
-      High-Growth Locations
-    </h3>
+          <InsightSection
+            id="rental-yield"
+            title="Yield & ROI Overview"
+            text="Residential properties in high-demand areas offer rental yields between 3% and 5%."
+            img="/images/market_rental_yield.jpeg"
+            reverse
+          />
 
-    <p className="text-[#1F3A2E] leading-relaxed mb-4">
-      High-growth locations are typically identified by strong infrastructure
-      projects, proximity to employment hubs, and improving social amenities.
-      These areas often outperform mature neighborhoods in appreciation.
-    </p>
+        </section>
 
-    <p className="text-[#1F3A2E] leading-relaxed">
-      IT corridors, metro-connected zones, and suburban expansions continue to
-      attract both end-users and investors looking for long-term value growth.
-    </p>
+        {/* Map */}
+        <section id="insights1" className="mt-20">
 
-  </div>
-</section>
+          <div className="bg-[#1F3A2E] rounded-[3rem] p-16 shadow-2xl">
 
-<section id="rental-yield" className="mt-24">
-  <div className="max-w-6xl mx-auto bg-[#FDF4E2] rounded-xl p-10 shadow-md">
+            <h2 className="text-4xl font-bold text-white mb-8">
+              Personalized Heatmaps
+            </h2>
 
-    <h3
-      className="text-2xl font-bold text-[#6D1B1C] mb-6"
-      style={{ fontFamily: "'Sanchez', serif" }}
-    >
-      Rental Yield Overview
-    </h3>
+            <div className="rounded-3xl overflow-hidden bg-white">
+              <PersonalizedMap />
+            </div>
 
-    <p className="text-[#1F3A2E] leading-relaxed mb-4">
-      Rental yield represents the annual rental income earned from a property
-      relative to its market value. It is a key metric for investors evaluating
-      income-generating assets.
-    </p>
+          </div>
 
-    <p className="text-[#1F3A2E] leading-relaxed">
-      Residential properties in high-demand urban areas typically offer rental
-      yields between <strong>3% and 5%</strong>, with higher returns observed
-      near IT hubs, universities, and commercial districts.
-    </p>
+        </section>
 
-  </div>
-</section>
-
-
-<section id="demand-pattern" className="mt-24 mb-24">
-  <div className="max-w-6xl mx-auto bg-white border border-[#B8A47C] rounded-xl p-10 shadow-sm">
-
-    <h3
-      className="text-2xl font-bold text-[#6D1B1C] mb-6"
-      style={{ fontFamily: "'Sanchez', serif" }}
-    >
-      Demand by Property Type
-    </h3>
-
-    <p className="text-[#1F3A2E] leading-relaxed mb-4">
-      Buyer demand in the real estate market is largely influenced by lifestyle
-      preferences, affordability, and family size. Compact yet functional
-      layouts continue to dominate residential demand.
-    </p>
-
-    <p className="text-[#1F3A2E] leading-relaxed">
-      Currently, <strong>2 BHK and 3 BHK</strong> configurations remain the most
-      sought-after property types, balancing space requirements with pricing
-      efficiency.
-    </p>
-
-  </div>
-</section>
-
-
-{/* PERSONALIZED MARKET INSIGHTS */}
-<section id="insights" className="mt-20 mb-20">
-  <div className="max-w-5xl mx-auto bg-[#FDF4E2] rounded-xl shadow-md p-10">
-
-    <h2
-      className="text-3xl font-bold text-center text-[#6D1B1C] mb-6"
-      style={{ fontFamily: "'Sanchez', serif" }}
-    >
-      Personalized Market Insights
-    </h2>
-
-    <p
-      className="text-center text-[#1F3A2E] max-w-3xl mx-auto mb-10 text-lg"
-      style={{ fontFamily: "'Lato', serif" }}
-    >
-      Get real-estate insights tailored to your preferences — including budget,
-      location, and purpose — to help you make confident and informed decisions.
-    </p>
-
-    {/* INSIGHT POINTS */}
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-
-      <div className="flex items-start gap-3">
-        <span className="text-[#A66E3A] text-xl">➤</span>
-        <p className="text-[#1F3A2E]">
-          Location-based price trends and growth potential
-        </p>
-      </div>
-
-      <div className="flex items-start gap-3">
-        <span className="text-[#A66E3A] text-xl">➤</span>
-        <p className="text-[#1F3A2E]">
-          Rental yield estimates based on your budget range
-        </p>
-      </div>
-
-      <div className="flex items-start gap-3">
-        <span className="text-[#A66E3A] text-xl">➤</span>
-        <p className="text-[#1F3A2E]">
-          Recommended property types aligned with your goals
-        </p>
-      </div>
-
-      <div className="flex items-start gap-3">
-        <span className="text-[#A66E3A] text-xl">➤</span>
-        <p className="text-[#1F3A2E]">
-          Market outlook for buyers, renters, and investors
-        </p>
-      </div>
-
-    </div>
-
-    {/* CTA BUTTON */}
-<div className="text-center">
-  <button
-    type="button"
-    onClick={() => {
-      document
-        .getElementById("insights1")
-        ?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }}
-    className="bg-[#6D1B1C] text-white px-10 py-3 rounded-xl
-               hover:bg-[#541516] transition-all duration-300"
-  >
-    Get Personalized Insights
-  </button>
-</div>
-
-  </div>
-</section>
-{/* TALK TO OUR EXPERT */}
-<section id="expert" className="mt-20 mb-24">
-  <div className="max-w-5xl mx-auto bg-[#FDF4E2] rounded-xl shadow-md p-10">
-
-    {/* Heading */}
-    <h2
-      className="text-3xl font-bold text-center text-[#6D1B1C] mb-4"
-      style={{ fontFamily: "'Sanchez', serif" }}
-    >
-      Talk to Our Property Expert
-    </h2>
-
-    {/* Subtext */}
-    <p
-      className="text-center text-[#1F3A2E] max-w-2xl mx-auto mb-10"
-      style={{ fontFamily: "'Lato', serif" }}
-    >
-      Not sure where to start? Our experts help you understand pricing, locations,
-      and building plans so you can make confident real estate decisions.
-    </p>
-
-    {/* CONTACT OPTIONS */}
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-
-      {/* CALL */}
-      <div className="bg-white border border-[#B8A47C] rounded-lg p-6 text-center">
-        <h4 className="font-semibold text-[#6D1B1C] mb-2">Call Us</h4>
-        <p className="text-sm text-[#1F3A2E]">+91 9XXXXXXXXX</p>
-      </div>
-
-      {/* EMAIL */}
-      <div className="bg-white border border-[#B8A47C] rounded-lg p-6 text-center">
-        <h4 className="font-semibold text-[#6D1B1C] mb-2">Email</h4>
-        <p className="text-sm text-[#1F3A2E]">support@estatelens.com</p>
-      </div>
-
-      {/* RESPONSE */}
-      <div className="bg-white border border-[#B8A47C] rounded-lg p-6 text-center">
-        <h4 className="font-semibold text-[#6D1B1C] mb-2">Response Time</h4>
-        <p className="text-sm text-[#1F3A2E]">Within 24 Hours</p>
-      </div>
-
-    </div>
-
-    {/* SIMPLE FORM */}
-    <div className="bg-white border border-[#B8A47C] rounded-xl p-8 max-w-3xl mx-auto">
-
-      <h4
-        className="text-xl font-semibold text-[#6D1B1C] mb-6 text-center"
-        style={{ fontFamily: "'Sanchez', serif" }}
-      >
-        Request Expert Assistance
-      </h4>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-        <input
-          type="text"
-          placeholder="Your Name"
-          className="border border-[#B8A47C] rounded-md px-4 py-2 focus:outline-none"
-        />
-
-        <input
-          type="email"
-          placeholder="Your Email"
-          className="border border-[#B8A47C] rounded-md px-4 py-2 focus:outline-none"
-        />
-
-        <select
-          className="border border-[#B8A47C] rounded-md px-4 py-2 focus:outline-none md:col-span-2"
+        {/* Calculator */}
+        <section
+          id="calculator"
+          className="mt-32 mb-24 bg-white border border-[#B8A47C]/20 rounded-[3rem] p-12 shadow-xl"
         >
-          <option>Interested In</option>
-          <option>Buying Property</option>
-          <option>Renting Property</option>
-          <option>Commercial Property</option>
-        </select>
 
-        <textarea
-          rows={3}
-          placeholder="Your Message"
-          className="border border-[#B8A47C] rounded-md px-4 py-2 focus:outline-none md:col-span-2"
-        />
+          <div className="text-center max-w-2xl mx-auto mb-12">
 
-        <button
-          className="md:col-span-2 bg-[#6D1B1C] text-white font-semibold py-3 rounded-md hover:bg-[#541516] transition"
-        >
-          Request Callback
-        </button>
+            <h2 className="text-4xl font-bold text-[#6D1B1C] mb-4">
+              Financial Projection
+            </h2>
+
+            <p className="text-[#1F3A2E]/60 italic">
+              Estimate your potential EMI.
+            </p>
+
+          </div>
+
+          <PriceCalculator />
+
+        </section>
+
+      </main>
+
+      <Footer />
+
+      {/* Floating Button */}
+      <button
+        onClick={() => setShowLoginModal(true)}
+        className="fixed bottom-10 right-10 bg-[#6D1B1C] text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center hover:scale-110"
+      >
+        <FaUserTie />
+      </button>
+
+      {showLoginModal && (
+        <LoginModal onClose={() => setShowLoginModal(false)} />
+      )}
+
+    </div>
+  );
+}
+
+function SidebarItem({ icon, label, onClick }: SidebarItemProps) {
+  return (
+    <button
+      onClick={onClick}
+      className="p-4 text-[#1F3A2E]/40 hover:text-[#6D1B1C] transition-all rounded-2xl"
+    >
+      {icon}
+    </button>
+  );
+}
+
+function InsightSection({
+  id,
+  title,
+  text,
+  img,
+  reverse = false,
+}: InsightSectionProps) {
+
+  return (
+    <div
+      id={id}
+      className={`flex flex-col lg:flex-row items-center gap-16 ${
+        reverse ? "lg:flex-row-reverse" : ""
+      }`}
+    >
+
+      <div className="lg:w-1/2">
+
+        <h3 className="text-3xl font-bold text-[#6D1B1C] mb-6">
+          {title}
+        </h3>
+
+        <p className="text-lg text-[#1F3A2E]/70 leading-relaxed mb-6">
+          {text}
+        </p>
 
       </div>
+
+      <div className="lg:w-1/2 w-full h-[400px] rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white">
+
+        <img
+          src={img}
+          alt={title}
+          className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+        />
+
+      </div>
+
     </div>
-
-  </div>
-</section>
-<div id="insights1">
-<PersonalizedMap />
-</div>
-
-<PriceCalculator />
-<Footer />
-
-
-     </div>
-     
-</div>
-
-     
-
-      {/* LOGIN MODAL */}
-      {showLoginModal && <LoginModal onClose={() => setShowLoginModal(false)} />}
-        
-    </div>
-    
   );
 }

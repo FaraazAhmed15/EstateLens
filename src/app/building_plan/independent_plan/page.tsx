@@ -17,62 +17,14 @@ import {
 
 
 
-export default function Independent_Plan_Page() {
+export default function Independent_plan_page() {
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   return (
     <div className="flex min-h-screen">
-      {/* LEFT FIXED PANEL */}
-      <div
-        className="w-[360px] h-screen fixed left-0 top-0
-                   bg-[#F4F1EC] border-r border-[#B8A47C]
-                   flex flex-col items-center px-6 py-8"
-      >
-        {/* Left Logo */}
-        <div className="bg-[#F4F1EC] p-4 rounded-lg">
-          <img
-            src="/images/logo.jpeg"
-            alt="EstateLens Logo"
-            className="w-32 mx-auto"/>
-        </div>
-        <h1 className="text-xl font-bold text-[#6D1B1C]">
-          <strong>EstateLens</strong>
-        </h1>
-        <p className="text-sm text-[#1F3A2E]">See Property Clearly</p>
-
-        {/* LEFT MENU BOX */}
-        <div className="w-full mt-12 border border-[#B8A47C] rounded-lg overflow-hidden bg-[#F4F1EC] z-10">
-          {[
-            { name: "Properties", href: "/properties", icon: <FaBuilding /> },
-            { name: "Market Insight", href: "/market_insight", icon: <FaNewspaper /> },
-            { name: "Sign Up", href: "/sign_up", icon: <FaSignInAlt /> },
-            { name: "About", href: "/about", icon: <FaInfoCircle /> },
-            { name: "Building Plan", href: "/building_plan", icon: <FaHome /> },
-            { name: "Logins", action: "login", icon: <FaKey /> },
-            { name: "List Property", href: "/list_property", icon: <FaCity /> },
-          ].map((item, index) => (
-            <a
-              key={index}
-              href={item.href}
-              onClick={
-                item.action === "login" ? () => setShowLoginModal(true) : undefined
-              }
-              className="group flex items-center gap-3 px-4 py-3 
-                         border-t border-[#B8A47C]
-                         text-[#1F3A2E]
-                         hover:bg-[#6D1B1C] hover:text-white
-                         transition">
-              <span className="text-lg text-[#6D1B1C] group-hover:text-white">
-                {item.icon}
-              </span>
-              <span className="font-medium">{item.name}</span>
-            </a>
-          ))}
-        </div>
-      </div>
-
-      {/* RIGHT CONTENT AREA */}
-<div className="flex-1 ml-[360px] relative bg-[#F4F1EC] overflow-y-auto">
+     
+     
+<div className="flex-1 relative bg-[#F4F1EC] overflow-y-auto">
 
   {/* CURVED IMAGE HEADER */}
   <div className="absolute top-0 left-0 w-full h-[90px] overflow-hidden">
@@ -101,29 +53,335 @@ export default function Independent_Plan_Page() {
     </svg>
   </div>
 
-  {/* PAGE CONTENT (push below header) */}
+  {/* page */}
   <div className="pt-[120px] p-8">
     <h1 className="text-5xl font-bold mb-4 text-center text-[#6D1B1C]" style={{ fontFamily: "'Sanchez', serif" }}>Independent Plan</h1>
+    <h3 className="text-xl font-bold  mb-16 text-center text-[#6D1B1C]" style={{ fontFamily: "'Sanchez', serif" }}>
+          Precision in planning, comfort in living — layouts that truly work for you</h3>
+          {/* independent plan */}
+<div className="max-w-4xl mx-auto text-[#1F3A2E] text-lg md:text-xl" style={{ fontFamily: "'Lato', serif" }}>
+  <h5 className="text-xl font-semibold mb-8 text-[#C79A62]">Independent Plan</h5>
+  <div
+    className="max-w-4xl mx-auto text-[#1F3A2E] text-lg md:text-xl"
+    style={{ fontFamily: "'Lato', serif" }}
+  >
+    <ul className="space-y-3">
+      <li className="flex items-start gap-3">
+        <span className="text-[#C79A62]">➤</span>
+        <span>
+          Designed for <strong>individual residential living</strong>
+        </span>
+      </li>
 
-    
-    
-           
- 
-  
+      <li className="flex items-start gap-3">
+        <span className="text-[#C79A62]">➤</span>
+        <span>
+          Focus on <strong>privacy, comfort, and personal space</strong>
+        </span>
+      </li>
 
-   
+      <li className="flex items-start gap-3">
+        <span className="text-[#C79A62]">➤</span>
+        <span>
+          Suitable for <strong>families, independent houses, and villas</strong>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+{/* functional area*/}
+<div className="mt-20 mx-14 bg-[#FDF4E2] rounded-xl shadow-md p-8">
 
+  {/* heading */}
+  <h2
+    className="text-3xl font-bold text-center text-[#6D1B1C] mb-8"
+    style={{ fontFamily: "'Sanchez', serif" }}
+  >
+    Functional Area Planning
+  </h2>
 
+  {/* IMAGE CENTER */}
+  <div className="flex justify-center mb-10">
+    <img
+      src="/images/independent_functional.jpeg"
+      alt="Independent Functional Area Planning"
+      className="w-[420px] h-auto rounded-lg border border-[#B8A47C] shadow-sm"
+    />
+  </div>
 
-     </div>
-     
+  {/* points */}
+  <div
+    className="max-w-4xl mx-auto text-[#1F3A2E] text-lg md:text-xl"
+    style={{ fontFamily: "'Lato', serif" }}
+  >
+    <ul className="space-y-4">
 
+      <li className="flex items-start gap-3">
+        <span className="text-[#C79A62] text-xl">➤</span>
+        <span>
+          Independent homes are organized into functional zones that balance
+          <strong>privacy and shared family spaces</strong>.
+        </span>
+      </li>
 
+      <li className="flex items-start gap-3">
+        <span className="text-[#C79A62] text-xl">➤</span>
+        <span>
+          Living and dining areas are placed centrally to encourage
+          <strong>family interaction and social gatherings</strong>.
+        </span>
+      </li>
 
+      <li className="flex items-start gap-3">
+        <span className="text-[#C79A62] text-xl">➤</span>
+        <span>
+          Bedrooms are positioned to ensure <strong>privacy, comfort, and quiet zones</strong>.
+        </span>
+      </li>
 
+      <li className="flex items-start gap-3">
+        <span className="text-[#C79A62] text-xl">➤</span>
+        <span>
+          Service areas such as kitchen, utility, and storage are integrated
+          for <strong>convenience and efficiency</strong>.
+        </span>
+      </li>
 
+      <li className="flex items-start gap-3">
+        <span className="text-[#C79A62] text-xl">➤</span>
+        <span>
+          Outdoor spaces like gardens, balconies, or terraces are planned to
+          enhance <strong>natural light, ventilation, and recreation</strong>.
+        </span>
+      </li>
 
+    </ul>
+  </div>
 
+</div>
+{/* circulation*/}
+<div className="mt-20 mx-14 bg-[#FDF4E2] rounded-xl shadow-md p-8">
+
+  {/*  heading */}
+  <h2
+    className="text-3xl font-bold text-center text-[#6D1B1C] mb-8"
+    style={{ fontFamily: "'Sanchez', serif" }}
+  >
+    Circulation & Movement Flow
+  </h2>
+
+  {/* image*/}
+  <div className="flex justify-center mb-10">
+    <img
+      src="/images/circulation_independent.jpeg"
+      alt="Independent Home Circulation Flow Diagram"
+      className="w-[420px] h-auto rounded-lg border border-[#B8A47C] shadow-sm"
+    />
+  </div>
+
+  {/* description */}
+  <div
+    className="max-w-4xl mx-auto text-[#1F3A2E] text-lg md:text-xl"
+    style={{ fontFamily: "'Lato', serif" }}
+  >
+    <ul className="space-y-4">
+
+      <li className="flex items-start gap-3">
+        <span className="text-[#C79A62] text-xl">➤</span>
+        <span>
+          Circulation is planned to ensure <strong>easy movement between living, dining, and private zones</strong>.
+        </span>
+      </li>
+
+      <li className="flex items-start gap-3">
+        <span className="text-[#C79A62] text-xl">➤</span>
+        <span>
+          Entrances and foyers are designed to provide a <strong>warm welcome and smooth transition</strong> into the home.
+        </span>
+      </li>
+
+      <li className="flex items-start gap-3">
+        <span className="text-[#C79A62] text-xl">➤</span>
+        <span>
+          Bedrooms are accessed through <strong>private corridors</strong>, maintaining separation from common areas.
+        </span>
+      </li>
+
+      <li className="flex items-start gap-3">
+        <span className="text-[#C79A62] text-xl">➤</span>
+        <span>
+          Kitchens and service areas are connected for <strong>functional convenience</strong> without disturbing main living spaces.
+        </span>
+      </li>
+
+      <li className="flex items-start gap-3">
+        <span className="text-[#C79A62] text-xl">➤</span>
+        <span>
+          Staircases, balconies, and outdoor pathways are integrated to promote <strong>natural flow and ventilation</strong>.
+        </span>
+      </li>
+
+    </ul>
+  </div>
+
+</div>
+{/* workspace */}
+<div className="mt-20 mx-14 bg-[#FDF4E2] rounded-xl shadow-md p-8">
+<div className="mt-20 max-w-4xl mx-auto text-[#1F3A2E] text-lg md:text-xl"
+     style={{ fontFamily: "'Lato', serif" }}>
+
+  <h2
+    className="text-3xl font-bold text-center text-[#6D1B1C] mb-8"
+    style={{ fontFamily: "'Sanchez', serif" }}
+  >
+    Workspace Design
+  </h2>
+
+  <ul className="space-y-4">
+
+    <li className="flex items-start gap-3">
+      <span className="text-[#C79A62]">➤</span>
+      <span>
+        Home workspaces are designed to balance <strong>productivity and comfort</strong> within a residential setting.
+      </span>
+    </li>
+
+    <li className="flex items-start gap-3">
+      <span className="text-[#C79A62]">➤</span>
+      <span>
+        Study rooms or home offices are placed in <strong>quiet zones</strong> to minimize distractions.
+      </span>
+    </li>
+
+    <li className="flex items-start gap-3">
+      <span className="text-[#C79A62]">➤</span>
+      <span>
+        Flexible layouts allow spaces to serve multiple purposes such as <strong>work, study, or creative activities</strong>.
+      </span>
+    </li>
+
+    <li className="flex items-start gap-3">
+      <span className="text-[#C79A62]">➤</span>
+      <span>
+        Natural lighting and ventilation are emphasized to create a <strong>healthy and inspiring environment</strong>.
+      </span>
+    </li>
+
+    <li className="flex items-start gap-3">
+      <span className="text-[#C79A62]">➤</span>
+      <span>
+        Ergonomic furniture and organized storage ensure <strong>long-term comfort and efficiency</strong>.
+      </span>
+    </li>
+
+  </ul>
+</div>
+</div>
+{/* public area planning */}
+<div className="mt-20 mx-14 bg-[#FDF4E2] rounded-xl shadow-md p-8">
+
+<div
+  className="max-w-4xl mx-auto mt-20 text-[#1F3A2E] text-lg md:text-xl"
+  style={{ fontFamily: "'Lato', serif" }}
+>
+  <h2
+    className="text-3xl font-bold text-center text-[#6D1B1C] mb-8"
+    style={{ fontFamily: "'Sanchez', serif" }}
+  >
+    Public Area Planning
+  </h2>
+
+  <ul className="space-y-4">
+    <li className="flex items-start gap-3">
+      <span className="text-[#C79A62] text-xl">➤</span>
+      <span>
+        Public areas in independent homes include <strong>living rooms, dining spaces, and entry foyers</strong> designed for family and guest interaction.
+      </span>
+    </li>
+
+    <li className="flex items-start gap-3">
+      <span className="text-[#C79A62] text-xl">➤</span>
+      <span>
+        These spaces are positioned centrally to act as the <strong>social hub of the home</strong>.
+      </span>
+    </li>
+
+    <li className="flex items-start gap-3">
+      <span className="text-[#C79A62] text-xl">➤</span>
+      <span>
+        Public zones are planned to be <strong>separate from private bedrooms</strong>, ensuring privacy for residents.
+      </span>
+    </li>
+
+    <li className="flex items-start gap-3">
+      <span className="text-[#C79A62] text-xl">➤</span>
+      <span>
+        Clear circulation paths connect living, dining, and outdoor areas for <strong>intuitive navigation</strong>.
+      </span>
+    </li>
+
+    <li className="flex items-start gap-3">
+      <span className="text-[#C79A62] text-xl">➤</span>
+      <span>
+        Accessibility features such as wide doorways and easy entry points are incorporated for <strong>elderly and differently-abled family members</strong>.
+      </span>
+    </li>
+  </ul>
+</div>
+</div>
+   {/* CONCLUSION (INDEPENDENT) */}
+   <div className="mt-20 mx-14 bg-[#FDF4E2] rounded-xl shadow-md p-8">
+
+<div
+  className="max-w-4xl mx-auto mt-20 mb-20 text-[#1F3A2E] text-lg md:text-xl"
+  style={{ fontFamily: "'Lato', serif" }}
+>
+  <h2
+    className="text-3xl font-bold text-center text-[#6D1B1C] mb-8"
+    style={{ fontFamily: "'Sanchez', serif" }}
+  >
+    Conclusion
+  </h2>
+
+  <ul className="space-y-4">
+    <li className="flex items-start gap-3">
+      <span className="text-[#C79A62] text-xl">➤</span>
+      <span>
+        The independent plan is designed to provide <strong>privacy, comfort, and personalized living</strong> for families and individuals.
+      </span>
+    </li>
+
+    <li className="flex items-start gap-3">
+      <span className="text-[#C79A62] text-xl">➤</span>
+      <span>
+        Clear separation between public areas, private bedrooms, and service zones ensures <strong>functional efficiency and family harmony</strong>.
+      </span>
+    </li>
+
+    <li className="flex items-start gap-3">
+      <span className="text-[#C79A62] text-xl">➤</span>
+      <span>
+        Circulation planning enhances <strong>smooth movement flow</strong> while maintaining privacy in personal spaces.
+      </span>
+    </li>
+
+    <li className="flex items-start gap-3">
+      <span className="text-[#C79A62] text-xl">➤</span>
+      <span>
+        The layout emphasizes <strong>safety, accessibility, and comfort</strong> for all family members, including elderly and children.
+      </span>
+    </li>
+
+    <li className="flex items-start gap-3">
+      <span className="text-[#C79A62] text-xl">➤</span>
+      <span>
+        Overall, the independent plan demonstrates a <strong>balanced and adaptable approach</strong> to modern residential design, aligned with lifestyle needs.
+      </span>
+    </li>
+  </ul>
+</div>
+</div>
+</div>
 </div>
       {/* LOGIN MODAL */}
       {showLoginModal && <LoginModal onClose={() => setShowLoginModal(false)} />}  
