@@ -1,5 +1,5 @@
 "use client";
-
+import WishlistButton from "@/components/WishlistButton";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation"; 
 import { getSession } from "@/lib/session";
@@ -171,6 +171,7 @@ const [ownerNumber, setOwnerNumber] = useState(null);
                            px-5 py-2 rounded-md hover:bg-[#F4E9D8] transition">
                 <FaHome /> Home
               </Link>
+               <WishlistButton />
             </div>
 
             <div className="mt-6">
