@@ -29,7 +29,7 @@ export default function BuildingPlanPage() {
     {
       title: "Independent House",
       subtitle: "Custom Villas & Estates",
-      href: "/building_plan/independent_house",
+      href: "/building_plan/independent_plan",
       icon: <FaHotel className="text-2xl" />,
       img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=400",
     },
