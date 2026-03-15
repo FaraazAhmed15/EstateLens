@@ -28,10 +28,10 @@ export default function CommercialOffice() {
 const [userName, setUserName] = useState<string | null>(null);
 const [ownerNumber, setOwnerNumber] = useState(null);
 
-  useEffect(() => { // ADD check login
-    const name = getSession();
-    setUserName(name);
-  }, []);
+useEffect(() => {
+  const currentSession = getSession(); // getSession returns { name, role } | null
+  setUserName(currentSession?.name || null); // store only the name
+}, []);
 
 
 

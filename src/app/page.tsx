@@ -9,11 +9,17 @@ import LoginModal from '@/components/LoginModal';
 import SubscribePopup from '@/components/buttonPopup';
 import PriceCalculator from '@/components/PriceCalculator';
 import SignupPopup from '@/components/signup_modal';
+import { getRole } from '@/lib/session';
 
 export default function HomePage() {
   const [openSignup, setOpenSignup] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [role, setRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    setRole(getRole());
+  }, []);
 
   const placeholders = [
     "Residential Plot, 1200 sqft , Devanahalli",
@@ -62,65 +68,62 @@ export default function HomePage() {
           {/* MENU LINKS */}
           <div className="flex gap-6 justify-center mb-6 text-lg font-medium flex-wrap">
 
-  <Link 
-    href="/home-user-subscribed/home-user-subscribed-properties" 
-    className="hover:underline"
-  >
-    Buy
-  </Link>
+            <Link 
+              href="/home-user-subscribed/home-user-subscribed-properties" 
+              className="hover:underline"
+            >
+              Buy
+            </Link>
 
-  <Link 
-    href="/home-user-subscribed/home-user-subscribed-properties" 
-    className="hover:underline"
-  >
-    Rent
-  </Link>
+            <Link 
+              href="/home-user-subscribed/home-user-subscribed-properties" 
+              className="hover:underline"
+            >
+              Rent
+            </Link>
 
-  <Link 
-    href="/list_property" 
-    className="hover:underline"
-  >
-    Sell
-  </Link>
+            <Link 
+              href="/list_property" 
+              className="hover:underline"
+            >
+              Sell
+            </Link>
 
-  <Link 
-    href="/pre-approval" 
-    className="hover:underline"
-  >
-    Pre-approval
-  </Link>
+            <Link 
+              href="/pre-approval" 
+              className="hover:underline"
+            >
+              Pre-approval
+            </Link>
 
-  <Link 
-    href="/market_insight" 
-    className="hover:underline"
-  >
-    Market Insight
-  </Link>
+            <Link 
+              href="/market_insight" 
+              className="hover:underline"
+            >
+              Market Insight
+            </Link>
 
-  <Link 
-    href="/building_plan" 
-    className="hover:underline"
-  >
-    Home Plan
-  </Link>
+            <Link 
+              href="/building_plan" 
+              className="hover:underline"
+            >
+              Home Plan
+            </Link>
 
-  {/* NEW LINKS */}
+            {/* NEW LINKS: ROLE-BASED */}
+            {role === "owner" && (
+              <Link href="/owner" className="hover:underline">
+                Owner
+              </Link>
+            )}
 
-  <Link 
-    href="/owner" 
-    className="hover:underline"
-  >
-    Owner
-  </Link>
+            {role === "admin" && (
+              <Link href="/admin" className="hover:underline">
+                Admin
+              </Link>
+            )}
 
-  <Link 
-    href="/admin" 
-    className="hover:underline"
-  >
-    Admin
-  </Link>
-
-</div>
+          </div>
 
           {/* SEARCH BAR */}
           <div className="flex justify-center">
@@ -160,7 +163,6 @@ export default function HomePage() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 max-w-7xl mx-auto">
-          {/* Card 1 */}
           <PropertyCard
             img="/images/home_card1.jpeg"
             title="Residential Apartment"
@@ -169,7 +171,6 @@ export default function HomePage() {
             href="/latest_prop_pages/home_residential"
           />
 
-          {/* Card 2 */}
           <PropertyCard
             img="/images/home_card2.jpeg"
             title="Commercial Office Space"
@@ -178,7 +179,6 @@ export default function HomePage() {
             href="/latest_prop_pages/home_office"
           />
 
-          {/* Card 3 */}
           <PropertyCard
             img="/images/home_card3.jpeg"
             title="Premium Independent Villa"
@@ -187,7 +187,6 @@ export default function HomePage() {
             href="/latest_prop_pages/home_villa"
           />
 
-          {/* Card 4 */}
           <PropertyCard
             img="/images/card4.jpeg"
             title="Single Family Home"
@@ -197,166 +196,140 @@ export default function HomePage() {
           />
         </div>
       </section>
-      {/* featured properties */}
-    <section className="mt-14 ml-6 mb-16">
-      <h2
-        className="text-3xl font-bold text-center text-[#6D1B1C] mb-12"
-        style={{ fontFamily: "'Sanchez', serif" }}>
-        Featured Properties
-      </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-
-        {/* CARD 1 */}
-        <Link href="/latest_prop_pages/home_residential" className="group">
-          <div className="bg-white border border-[#B8A47C] rounded-xl shadow-md overflow-hidden
-                          hover:shadow-xl transition cursor-pointer">
-            <img
-              src="/images/home_card1.jpeg"
-              alt="Residential Apartment"
-              className="w-full h-[200px] object-cover"/>
-            <div className="p-6">
-              <h4 className="text-lg font-semibold text-[#6D1B1C] mb-2 group-hover:underline">
-                Luxury Residential Apartment
-              </h4>
-              <p className="text-sm text-[#1F3A2E] mb-3">
-                2 BHK • Bengaluru • Near Metro
-              </p>
-              <p className="text-sm font-medium text-[#A66E3A]">
-                ₹ 85 Lakhs
-              </p>
-            </div>
-          </div>
-        </Link>
-
-        {/* CARD 2 */}
-        <Link href="/latest_prop_pages/home_office" className="group">
-          <div className="bg-white border border-[#B8A47C] rounded-xl shadow-md overflow-hidden
-                          hover:shadow-xl transition cursor-pointer">
-            <img
-              src="/images/home_card2.jpeg"
-              alt="Commercial Space"
-              className="w-full h-[200px] object-cover"/>
-            <div className="p-6">
-              <h4 className="text-lg font-semibold text-[#6D1B1C] mb-2 group-hover:underline">
-                Commercial Office Space
-              </h4>
-              <p className="text-sm text-[#1F3A2E] mb-3">
-                IT Park • Whitefield
-              </p>
-              <p className="text-sm font-medium text-[#A66E3A]">
-                ₹ 9.4 Crore
-              </p>
-            </div>
-          </div>
-        </Link>
-
-        {/* CARD 3 */}
-        <Link href="/latest_prop_pages/home_villa" className="group">
-          <div className="bg-white border border-[#B8A47C] rounded-xl shadow-md overflow-hidden
-                          hover:shadow-xl transition cursor-pointer">
-            <img
-              src="/images/home_card3.jpeg"
-              alt="Villa Property"
-              className="w-full h-[200px] object-cover"/>
-            <div className="p-6">
-              <h4 className="text-lg font-semibold text-[#6D1B1C] mb-2 group-hover:underline">
-                Premium Independent Villa
-              </h4>
-              <p className="text-sm text-[#1F3A2E] mb-3">
-                Gated Community • Mysuru
-              </p>
-              <p className="text-sm font-medium text-[#A66E3A]">
-                ₹ 2.1 Crore
-              </p>
-            </div>
-          </div>
-        </Link>
-
-      </div>
-    </section>
-        {/* NEARBY LIFESTYLE & AMENITIES */}
-<section className="mt-10 mb-20">
-  <h2
-    className="text-3xl font-bold text-center text-[#6D1B1C] mb-12"
-    style={{ fontFamily: "'Sanchez', serif" }}
-  >
-    Lifestyle & Amenities
-  </h2>
-
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 max-w-6xl mx-auto px-6">
-
-    {[
-      { title: "Green Parks", img: "/images/park1.jpeg" },
-      { title: "Swimming Pool", img: "/images/pool.jpeg" },
-      { title: "Shopping Mall", img: "/images/mall.jpeg" },
-      { title: "Fitness Club", img: "/images/fitness.jpeg" },
-    ].map((item, index) => (
-      <div key={index} className="amenity-card">
-        
-
-        {/* IMAGE WRAPPER */}
-        <div className="amenity-image">
-          <img src={item.img} alt={item.title} />
-        </div>
-        <h4 style={{ fontFamily: "'Sanchez', serif" }}>{item.title}</h4>
-
-
-       
-
-      </div>
-    ))}
-
-  </div>
-</section>
-
-{/* Vision Section */}
-<section className="mt-10 mb-10">
-  <div className="w-full bg-[#FDF4E2] rounded-2xl shadow-md overflow-hidden">
-    <div className="grid grid-cols-1 md:grid-cols-2">
-      
-      {/* Image on left */}
-      <div
-        className="relative h-[420px] w-full"
-        style={{
-          backgroundImage: "url('/images/vision.jpeg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      ></div>
-
-      {/* Right side content */}
-      <div className="p-12 flex flex-col justify-center w-full">
+      {/* FEATURED PROPERTIES 2 */}
+      <section className="mt-14 ml-6 mb-16">
         <h2
-          className="text-3xl font-bold text-[#6D1B1C] mb-6"
+          className="text-3xl font-bold text-center text-[#6D1B1C] mb-12"
           style={{ fontFamily: "'Sanchez', serif" }}
         >
-          Our Vision at EstateLens
+          Featured Properties
         </h2>
 
-        <p
-          className="text-[#1F3A2E] text-lg leading-relaxed mb-6"
-          style={{ fontFamily: "'Lato', serif" }}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+          <Link href="/latest_prop_pages/home_residential" className="group">
+            <div className="bg-white border border-[#B8A47C] rounded-xl shadow-md overflow-hidden hover:shadow-xl transition cursor-pointer">
+              <img src="/images/home_card1.jpeg" alt="Residential Apartment" className="w-full h-[200px] object-cover"/>
+              <div className="p-6">
+                <h4 className="text-lg font-semibold text-[#6D1B1C] mb-2 group-hover:underline">
+                  Luxury Residential Apartment
+                </h4>
+                <p className="text-sm text-[#1F3A2E] mb-3">
+                  2 BHK • Bengaluru • Near Metro
+                </p>
+                <p className="text-sm font-medium text-[#A66E3A]">
+                  ₹ 85 Lakhs
+                </p>
+              </div>
+            </div>
+          </Link>
+
+          <Link href="/latest_prop_pages/home_office" className="group">
+            <div className="bg-white border border-[#B8A47C] rounded-xl shadow-md overflow-hidden hover:shadow-xl transition cursor-pointer">
+              <img src="/images/home_card2.jpeg" alt="Commercial Space" className="w-full h-[200px] object-cover"/>
+              <div className="p-6">
+                <h4 className="text-lg font-semibold text-[#6D1B1C] mb-2 group-hover:underline">
+                  Commercial Office Space
+                </h4>
+                <p className="text-sm text-[#1F3A2E] mb-3">
+                  IT Park • Whitefield
+                </p>
+                <p className="text-sm font-medium text-[#A66E3A]">
+                  ₹ 9.4 Crore
+                </p>
+              </div>
+            </div>
+          </Link>
+
+          <Link href="/latest_prop_pages/home_villa" className="group">
+            <div className="bg-white border border-[#B8A47C] rounded-xl shadow-md overflow-hidden hover:shadow-xl transition cursor-pointer">
+              <img src="/images/home_card3.jpeg" alt="Villa Property" className="w-full h-[200px] object-cover"/>
+              <div className="p-6">
+                <h4 className="text-lg font-semibold text-[#6D1B1C] mb-2 group-hover:underline">
+                  Premium Independent Villa
+                </h4>
+                <p className="text-sm text-[#1F3A2E] mb-3">
+                  Gated Community • Mysuru
+                </p>
+                <p className="text-sm font-medium text-[#A66E3A]">
+                  ₹ 2.1 Crore
+                </p>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </section>
+
+      {/* NEARBY LIFESTYLE & AMENITIES */}
+      <section className="mt-10 mb-20">
+        <h2
+          className="text-3xl font-bold text-center text-[#6D1B1C] mb-12"
+          style={{ fontFamily: "'Sanchez', serif" }}
         >
-          EstateLens was built to bring transparency and clarity to real-estate
-          decisions. We simplify complex property data and present it in a
-          structured, trustworthy way — so every user can move forward with
-          confidence.
-        </p>
+          Lifestyle & Amenities
+        </h2>
 
-        {/* Highlights */}
-        <ul className="space-y-3 text-[#1F3A2E]">
-          <li>✔ Verified & reliable property information</li>
-          <li>✔ Clear building layouts and planning insights</li>
-          <li>✔ Designed for buyers, renters & investors</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-<PriceCalculator />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 max-w-6xl mx-auto px-6">
+          {[
+            { title: "Green Parks", img: "/images/park1.jpeg" },
+            { title: "Swimming Pool", img: "/images/pool.jpeg" },
+            { title: "Shopping Mall", img: "/images/mall.jpeg" },
+            { title: "Fitness Club", img: "/images/fitness.jpeg" },
+          ].map((item, index) => (
+            <div key={index} className="amenity-card">
+              <div className="amenity-image">
+                <img src={item.img} alt={item.title} />
+              </div>
+              <h4 style={{ fontFamily: "'Sanchez', serif" }}>{item.title}</h4>
+            </div>
+          ))}
+        </div>
+      </section>
 
-{/* HERO SECTION */}
+      {/* Vision Section */}
+      <section className="mt-10 mb-10">
+        <div className="w-full bg-[#FDF4E2] rounded-2xl shadow-md overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            <div
+              className="relative h-[420px] w-full"
+              style={{
+                backgroundImage: "url('/images/vision.jpeg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            ></div>
+
+            <div className="p-12 flex flex-col justify-center w-full">
+              <h2
+                className="text-3xl font-bold text-[#6D1B1C] mb-6"
+                style={{ fontFamily: "'Sanchez', serif" }}
+              >
+                Our Vision at EstateLens
+              </h2>
+
+              <p
+                className="text-[#1F3A2E] text-lg leading-relaxed mb-6"
+                style={{ fontFamily: "'Lato', serif" }}
+              >
+                EstateLens was built to bring transparency and clarity to real-estate
+                decisions. We simplify complex property data and present it in a
+                structured, trustworthy way — so every user can move forward with
+                confidence.
+              </p>
+
+              <ul className="space-y-3 text-[#1F3A2E]">
+                <li>✔ Verified & reliable property information</li>
+                <li>✔ Clear building layouts and planning insights</li>
+                <li>✔ Designed for buyers, renters & investors</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <PriceCalculator />
+
+      {/* HERO SECTION */}
       <section
         className="relative h-[65vh] flex items-center justify-center text-center"
         style={{
@@ -365,26 +338,24 @@ export default function HomePage() {
           backgroundPosition: "center",
         }}
       >
-        {/* Overlay */}
         <div className="absolute inset-0 bg-black/40"></div>
 
         <div className="relative z-10 text-white px-6">
           <h5 className="text-2xl font-bold mb-4">Unique Homes</h5>
 
-{/* BIG TITLE */}
-<h4 className="text-5xl md:text-4xl font-semibold mb-6">
-  Bengaluru Real Estate Shows Surprising Price Adjustments
-</h4>
+          <h4 className="text-5xl md:text-4xl font-semibold mb-6">
+            Bengaluru Real Estate Shows Surprising Price Adjustments
+          </h4>
 
-{/* VIEW ARTICLE BUTTON */}
-<Link href="/article">
-<button
-  className="px-8 py-3 bg-black text-white rounded-full border-2 border-white 
-  shadow-[0_0_12px_rgba(225,225,225,0.6)] hover:bg-white hover:text-black transition-all 
-  duration-300 font-semibold tracking-wide">
-  Read Article
-</button>
-</Link>
+          <Link href="/article">
+            <button
+              className="px-8 py-3 bg-black text-white rounded-full border-2 border-white 
+              shadow-[0_0_12px_rgba(225,225,225,0.6)] hover:bg-white hover:text-black transition-all 
+              duration-300 font-semibold tracking-wide"
+            >
+              Read Article
+            </button>
+          </Link>
         </div>
       </section>
 
@@ -395,8 +366,6 @@ export default function HomePage() {
         isOpen={showPopup}
         onClose={() => setShowPopup(false)}
       />
-
-      
     </div>
   );
 }
@@ -408,8 +377,6 @@ type PropertyCardProps = {
   price: string;
   href: string
 };
-
-
 
 function PropertyCard({ img, title, desc, price, href }: PropertyCardProps) {
   return (

@@ -30,10 +30,10 @@ export default function PropertyPage() {
 
   const [ownerNumber, setOwnerNumber] = useState<string | null>(null);
 
-  useEffect(() => {
-    const name = getSession(); // get login session
-    setUserName(name);
-  }, []);
+useEffect(() => {
+  const currentSession = getSession(); // getSession returns { name, role } | null
+  setUserName(currentSession?.name || null); // store only the name
+}, []);
 
   /* ======================================================
      GET OWNER NUMBER (FROM properties.contact_owner)

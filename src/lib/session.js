@@ -1,12 +1,16 @@
-export function login(name) {
+export function login(name, role) {
   if (typeof window !== "undefined") {
     localStorage.setItem("userName", name);
+    localStorage.setItem("userRole", role);   // store role
   }
 }
 
 export function getSession() {
   if (typeof window !== "undefined") {
-    return localStorage.getItem("userName") || null;
+    return {
+      name: localStorage.getItem("userName"),
+      role: localStorage.getItem("userRole"),
+    };
   }
   return null;
 }
@@ -14,10 +18,18 @@ export function getSession() {
 export function logout() {
   if (typeof window !== "undefined") {
     localStorage.removeItem("userName");
+    localStorage.removeItem("userRole"); // remove role also
   }
 }
 
-// Check if user is logged in
 export function isLoggedIn() {
-  return getSession() !== null;
+  return localStorage.getItem("userName") !== null;
+}
+
+// helper to check role
+export function getRole() {
+  if (typeof window !== "undefined") {
+    return localStorage.getItem("userRole");
+  }
+  return null;
 }
