@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 
 import SubscribedLatestProperties from "@/components/subscribed_user_latest_properties";
 import Subscribed_user_PlotsAndLand from "@/components/subscribed_user_plot_land";
@@ -13,8 +14,9 @@ type Property = {
   id: number;
   title: string;
   location: string;
-  price: string;   // display price like ₹55 Lakhs
+  price: string;
   image: string;
+  page_path: string;
 };
 
 export default function Subscribed_PropertiesPage() {
@@ -209,6 +211,14 @@ export default function Subscribed_PropertiesPage() {
                   <p className="text-[#6D1B1C] font-bold">
                     {p.price}
                   </p>
+
+                  {/* VIEW DETAILS BUTTON */}
+                  <Link
+                    href={p.page_path}
+                    className="mt-3 inline-block bg-[#6D1B1C] text-white px-5 py-2 rounded-md hover:bg-[#541516]"
+                  >
+                    View Details
+                  </Link>
 
                 </div>
               ))
