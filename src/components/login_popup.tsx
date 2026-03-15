@@ -20,8 +20,8 @@ export default function LoginPopup({
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  // NEW: role selection
-  const [role, setRole] = useState<"owner" | "admin" | null>(null);
+  // UPDATED: role selection now includes user
+  const [role, setRole] = useState<"user" | "owner" | "admin" | null>(null);
 
   if (!isOpen) return null;
 
@@ -34,7 +34,7 @@ export default function LoginPopup({
       body: JSON.stringify({
         email,
         password,
-        role, // send role to backend
+        role,
       }),
     });
 
@@ -63,7 +63,7 @@ export default function LoginPopup({
 
         <button
           onClick={() => {
-            setRole(null); // reset role
+            setRole(null);
             onClose();
           }}
           className="absolute top-4 right-4 text-gray-500 hover:text-[#6D1B1C]"
@@ -80,6 +80,15 @@ export default function LoginPopup({
 
             <div className="mt-8 space-y-4">
 
+              {/* USER LOGIN */}
+              <button
+                onClick={() => setRole("user")}
+                className="w-full px-6 py-3 rounded-lg bg-[#6D1B1C] text-white font-semibold hover:bg-[#551415]"
+              >
+                User Login
+              </button>
+
+              {/* OWNER LOGIN */}
               <button
                 onClick={() => setRole("owner")}
                 className="w-full px-6 py-3 rounded-lg bg-[#6D1B1C] text-white font-semibold hover:bg-[#551415]"
@@ -87,6 +96,7 @@ export default function LoginPopup({
                 Owner Login
               </button>
 
+              {/* ADMIN LOGIN */}
               <button
                 onClick={() => setRole("admin")}
                 className="w-full px-6 py-3 rounded-lg border border-[#6D1B1C] text-[#6D1B1C] font-semibold hover:bg-[#FDF4E2]"

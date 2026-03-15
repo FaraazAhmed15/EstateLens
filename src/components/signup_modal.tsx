@@ -4,21 +4,18 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { FaEye, FaEyeSlash, FaTimes } from "react-icons/fa";
 import { validateSignup } from "@/lib/validation/signupValidation";
 
-// Props type
 interface SignupModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSwitchToLogin: () => void;
 }
 
-// Form state type
 interface SignupForm {
   name: string;
   email: string;
   password: string;
 }
 
-// Errors type
 type SignupErrors = Partial<SignupForm>;
 
 export default function SignupModal({
@@ -38,9 +35,11 @@ export default function SignupModal({
   const [errors, setErrors] = useState<SignupErrors>({});
   const [loading, setLoading] = useState(false);
 
+  // NEW → role selection
+  const [role, setRole] = useState<"user" | "owner" | null>(null);
+
   if (!isOpen) return null;
 
-  // Handle input change
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
@@ -49,14 +48,12 @@ export default function SignupModal({
       [name]: value,
     }));
 
-    // Remove error when user types
     setErrors((prev) => ({
       ...prev,
       [name]: "",
     }));
   };
 
-  // Handle form submit
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -75,7 +72,10 @@ export default function SignupModal({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          role, // send role to backend
+        }),
       });
 
       const data = await res.json();
@@ -90,6 +90,7 @@ export default function SignupModal({
           password: "",
         });
         setErrors({});
+        setRole(null);
         onClose();
       }
 
@@ -115,96 +116,130 @@ export default function SignupModal({
 
         {/* Close Button */}
         <button
-          onClick={onClose}
+          onClick={() => {
+            setRole(null);
+            onClose();
+          }}
           className="absolute top-4 right-4 text-gray-500"
         >
           <FaTimes />
         </button>
 
-        <h1 className="text-2xl font-bold text-center mb-6">
-          Create an Account
-        </h1>
+        {/* STEP 1 → SELECT ROLE */}
+        {!role && (
+          <>
+            <h1 className="text-2xl font-bold text-center mb-6">
+              Sign Up As
+            </h1>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-4">
 
-          {/* Name */}
-          <div>
-            <input
-              type="text"
-              name="name"
-              placeholder="Full Name"
-              value={form.name}
-              onChange={handleChange}
-              className="w-full px-4 py-3 border rounded-lg"
-            />
-            {errors.name && (
-              <p className="text-red-500 text-xs">{errors.name}</p>
-            )}
-          </div>
+              <button
+                onClick={() => setRole("user")}
+                className="w-full py-3 bg-[#6D1B1C] text-white rounded-lg"
+              >
+                User
+              </button>
 
-          {/* Email */}
-          <div>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={form.email}
-              onChange={handleChange}
-              className="w-full px-4 py-3 border rounded-lg"
-            />
-            {errors.email && (
-              <p className="text-red-500 text-xs">{errors.email}</p>
-            )}
-          </div>
+              <button
+                onClick={() => setRole("owner")}
+                className="w-full py-3 border border-[#6D1B1C] text-[#6D1B1C] rounded-lg"
+              >
+                Owner
+              </button>
 
-          {/* Password */}
-          <div className="relative">
-            <input
-              type={showPassword ? "text" : "password"}
-              name="password"
-              placeholder="Password"
-              value={form.password}
-              onChange={handleChange}
-              className="w-full px-4 py-3 border rounded-lg"
-            />
+            </div>
+          </>
+        )}
 
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-3"
-            >
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
-            </button>
+        {/* STEP 2 → SIGNUP FORM */}
+        {role && (
+          <>
+            <h1 className="text-2xl font-bold text-center mb-6">
+              Create an Account
+            </h1>
 
-            {errors.password && (
-              <p className="text-red-500 text-xs">{errors.password}</p>
-            )}
-          </div>
+            <form onSubmit={handleSubmit} className="space-y-4">
 
-          {/* Submit */}
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-3 bg-[#6D1B1C] text-white rounded-lg"
-          >
-            {loading ? "Creating..." : "Sign Up"}
-          </button>
+              {/* Name */}
+              <div>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Full Name"
+                  value={form.name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border rounded-lg"
+                />
+                {errors.name && (
+                  <p className="text-red-500 text-xs">{errors.name}</p>
+                )}
+              </div>
 
-        </form>
+              {/* Email */}
+              <div>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={form.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border rounded-lg"
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-xs">{errors.email}</p>
+                )}
+              </div>
 
-        {/* Login switch */}
-        <p className="text-center text-sm mt-4">
-          Already have an account?
-          <span
-            onClick={() => {
-              onClose();
-              onSwitchToLogin();
-            }}
-            className="text-[#6D1B1C] cursor-pointer ml-1"
-          >
-            Login
-          </span>
-        </p>
+              {/* Password */}
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  placeholder="Password"
+                  value={form.password}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border rounded-lg"
+                />
+
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-3"
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+
+                {errors.password && (
+                  <p className="text-red-500 text-xs">{errors.password}</p>
+                )}
+              </div>
+
+              {/* Submit */}
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full py-3 bg-[#6D1B1C] text-white rounded-lg"
+              >
+                {loading ? "Creating..." : "Sign Up"}
+              </button>
+
+            </form>
+
+            <p className="text-center text-sm mt-4">
+              Already have an account?
+              <span
+                onClick={() => {
+                  onClose();
+                  onSwitchToLogin();
+                }}
+                className="text-[#6D1B1C] cursor-pointer ml-1"
+              >
+                Login
+              </span>
+            </p>
+          </>
+        )}
 
       </div>
     </div>

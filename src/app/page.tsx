@@ -61,13 +61,66 @@ export default function HomePage() {
 
           {/* MENU LINKS */}
           <div className="flex gap-6 justify-center mb-6 text-lg font-medium flex-wrap">
-            <Link href="/home-user-subscribed/home-user-subscribed-properties" className="hover:underline">Buy</Link>
-            <Link href="/home-user-subscribed/home-user-subscribed-properties" className="hover:underline">Rent</Link>
-            <Link href="/list_property" className="hover:underline">Sell</Link>
-            <Link href="/pre-approval" className="hover:underline">Pre-approval</Link>
-            <Link href="/market_insight" className="hover:underline">market Insight</Link>
-            <Link href="/building_plan" className="hover:underline">Home Plan</Link>
-          </div>
+
+  <Link 
+    href="/home-user-subscribed/home-user-subscribed-properties" 
+    className="hover:underline"
+  >
+    Buy
+  </Link>
+
+  <Link 
+    href="/home-user-subscribed/home-user-subscribed-properties" 
+    className="hover:underline"
+  >
+    Rent
+  </Link>
+
+  <Link 
+    href="/list_property" 
+    className="hover:underline"
+  >
+    Sell
+  </Link>
+
+  <Link 
+    href="/pre-approval" 
+    className="hover:underline"
+  >
+    Pre-approval
+  </Link>
+
+  <Link 
+    href="/market_insight" 
+    className="hover:underline"
+  >
+    Market Insight
+  </Link>
+
+  <Link 
+    href="/building_plan" 
+    className="hover:underline"
+  >
+    Home Plan
+  </Link>
+
+  {/* NEW LINKS */}
+
+  <Link 
+    href="/owner" 
+    className="hover:underline"
+  >
+    Owner
+  </Link>
+
+  <Link 
+    href="/admin" 
+    className="hover:underline"
+  >
+    Admin
+  </Link>
+
+</div>
 
           {/* SEARCH BAR */}
           <div className="flex justify-center">
