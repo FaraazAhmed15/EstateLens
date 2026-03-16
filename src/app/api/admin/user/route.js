@@ -2,28 +2,63 @@ import { NextResponse } from "next/server";
 import mysql from "mysql2/promise";
 
 const dbConfig = {
-  host: "localhost",   // or 127.0.0.1
+  host: "localhost",
   user: "root",
-  password: "",        // add your MySQL password if you have one
+  password: "",
   database: "housing",
 };
 
-// GET all users (Feedback-style)
 export async function GET() {
-  let connection;
   try {
-    connection = await mysql.createConnection(dbConfig);
+    const connection = await mysql.createConnection(dbConfig);
 
-    // Fetch users
     const [rows] = await connection.execute(
-      `SELECT id, name, email, role, created_at FROM users`
+      "SELECT id, name, email, role, created_at FROM users"
     );
 
     await connection.end();
+
     return NextResponse.json(rows);
-  } catch (err) {
-    console.error("GET /api/admin/user error:", err);
+  } catch (error) {
+    console.error("GET users error:", error);
+
+    return NextResponse.json(
+      { error: "Failed to fetch users" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(req) {
+  let connection;
+
+  try {
+    const body = await req.json();
+    const { name, email, password } = body;
+
+    connection = await mysql.createConnection(dbConfig);
+
+    const [result] = await connection.execute(
+      `INSERT INTO users (name, email, password, role, created_at)
+       VALUES (?, ?, ?, 'admin', NOW())`,
+      [name, email, password]
+    );
+
+    await connection.end();
+
+    return NextResponse.json({
+      success: true,
+      id: result.insertId,
+    });
+
+  } catch (error) {
+    console.error("POST user error:", error);
+
     if (connection) await connection.end();
-    return NextResponse.json({ error: "Failed to fetch users" }, { status: 500 });
+
+    return NextResponse.json(
+      { error: "Failed to add admin" },
+      { status: 500 }
+    );
   }
 }

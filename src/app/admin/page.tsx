@@ -12,23 +12,34 @@ interface User {
 
 interface Feedback {
   id: number;
+  message: string;
+}
+
+interface ContactMessage {
+  id: number;
   name: string;
   email: string;
   phone: string;
   message: string;
 }
 
-interface ContactMessage {
+interface OwnerMessage {
   id: number;
   userName: string;
+  page_path: string;
   message: string;
+  created_at: string;
 }
 
 export default function AdminPage() {
   const [users, setUsers] = useState<User[]>([]);
   const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
   const [contacts, setContacts] = useState<ContactMessage[]>([]);
-  const [view, setView] = useState<"users" | "feedback" | "messages">("users");
+  const [messages, setMessages] = useState<OwnerMessage[]>([]);
+
+  const [view, setView] = useState<
+    "users" | "feedback" | "messages" | "contact"
+  >("users");
 
   const [loading, setLoading] = useState(true);
   const [loadingData, setLoadingData] = useState(false);
@@ -40,7 +51,6 @@ export default function AdminPage() {
   const [adding, setAdding] = useState(false);
   const [addMessage, setAddMessage] = useState<string | null>(null);
 
-  // Fetch users on initial load
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -85,9 +95,26 @@ export default function AdminPage() {
     try {
       const res = await fetch("/api/admin/messages");
       if (!res.ok) throw new Error("Failed to fetch messages");
+      const data: OwnerMessage[] = await res.json();
+      setMessages(data);
+      setView("messages");
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || "An error occurred");
+    } finally {
+      setLoadingData(false);
+    }
+  };
+
+  const fetchContact = async () => {
+    setLoadingData(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/admin/contact");
+      if (!res.ok) throw new Error("Failed to fetch contact");
       const data: ContactMessage[] = await res.json();
       setContacts(data);
-      setView("messages");
+      setView("contact");
     } catch (err: any) {
       console.error(err);
       setError(err.message || "An error occurred");
@@ -111,10 +138,22 @@ export default function AdminPage() {
           password: newAdminPassword,
         }),
       });
+
       const data = await res.json();
+
       if (!res.ok) throw new Error(data.error || "Failed to add admin");
 
-      setUsers([...users, { id: data.id, name: newAdminName, email: newAdminEmail, role: "admin", created_at: new Date().toISOString() }]);
+      setUsers([
+        ...users,
+        {
+          id: data.id,
+          name: newAdminName,
+          email: newAdminEmail,
+          role: "admin",
+          created_at: new Date().toISOString(),
+        },
+      ]);
+
       setAddMessage("Admin added successfully!");
       setNewAdminName("");
       setNewAdminEmail("");
@@ -127,114 +166,206 @@ export default function AdminPage() {
     }
   };
 
-  if (loading) return <div className="text-center mt-20 text-lg">Loading users...</div>;
-  if (error) return <div className="text-center mt-20 text-red-500">{error}</div>;
+  if (loading)
+    return <div className="text-center mt-20 text-lg">Loading users...</div>;
+
+  if (error)
+    return <div className="text-center mt-20 text-red-500">{error}</div>;
 
   return (
     <div className="min-h-screen bg-[#FDF4E2] p-8">
-      <h1 className="text-3xl font-bold text-center mb-4">Administrator Dashboard</h1>
+      <h1 className="text-3xl font-bold text-center mb-4">
+        Administrator Dashboard
+      </h1>
 
-      {/* Buttons */}
       <div className="flex justify-center gap-4 mb-6">
-        <button onClick={fetchUsers} className="bg-[#6D1B1C] hover:bg-[#8B1F20] text-white font-semibold py-2 px-4 rounded">Users</button>
-        <button onClick={fetchFeedbacks} className="bg-[#6D1B1C] hover:bg-[#8B1F20] text-white font-semibold py-2 px-4 rounded">Feedback</button>
-        <button onClick={fetchMessages} className="bg-[#6D1B1C] hover:bg-[#8B1F20] text-white font-semibold py-2 px-4 rounded">Messages</button>
+        <button
+          onClick={fetchUsers}
+          className="bg-[#6D1B1C] text-white py-2 px-4 rounded"
+        >
+          Users
+        </button>
+
+        <button
+          onClick={fetchFeedbacks}
+          className="bg-[#6D1B1C] text-white py-2 px-4 rounded"
+        >
+          Feedback
+        </button>
+
+        <button
+          onClick={fetchMessages}
+          className="bg-[#6D1B1C] text-white py-2 px-4 rounded"
+        >
+          Messages
+        </button>
+
+        <button
+          onClick={fetchContact}
+          className="bg-[#6D1B1C] text-white py-2 px-4 rounded"
+        >
+          Contact
+        </button>
       </div>
 
       {loadingData && <div className="text-center mb-6">Loading...</div>}
 
-      {/* Users Table */}
       {view === "users" && users.length > 0 && (
-        <div className="overflow-x-auto mb-10">
-          <table className="w-full border-collapse bg-white rounded-xl shadow-md">
-            <thead className="bg-[#6D1B1C] text-white">
-              <tr>
-                <th className="p-3 text-left">ID</th>
-                <th className="p-3 text-left">Name</th>
-                <th className="p-3 text-left">Email</th>
-                <th className="p-3 text-left">Role</th>
-                <th className="p-3 text-left">Created At</th>
+        <table className="w-full bg-white rounded shadow">
+          <thead className="bg-[#6D1B1C] text-white">
+            <tr>
+              <th className="p-3">ID</th>
+              <th className="p-3">Name</th>
+              <th className="p-3">Email</th>
+              <th className="p-3">Role</th>
+              <th className="p-3">Created</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {users.map((u) => (
+              <tr key={u.id} className="border-b">
+                <td className="p-3">{u.id}</td>
+                <td className="p-3">{u.name}</td>
+                <td className="p-3">{u.email}</td>
+                <td className="p-3">{u.role}</td>
+                <td className="p-3">
+                  {new Date(u.created_at).toLocaleString()}
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {users.map(u => (
-                <tr key={u.id} className="border-b last:border-none">
-                  <td className="p-3">{u.id}</td>
-                  <td className="p-3">{u.name}</td>
-                  <td className="p-3">{u.email}</td>
-                  <td className="p-3">{u.role}</td>
-                  <td className="p-3">{new Date(u.created_at).toLocaleString()}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       )}
 
-      {/* Feedback Table */}
       {view === "feedback" && feedbacks.length > 0 && (
-        <div className="overflow-x-auto mb-10">
-          <table className="w-full border-collapse bg-white rounded-xl shadow-md">
-            <thead className="bg-[#6D1B1C] text-white">
-              <tr>
-                <th className="p-3 text-left">ID</th>
-                <th className="p-3 text-left">Name</th>
-                <th className="p-3 text-left">Email</th>
-                <th className="p-3 text-left">Phone</th>
-                <th className="p-3 text-left">Message</th>
+        <table className="w-full bg-white rounded shadow">
+          <thead className="bg-[#6D1B1C] text-white">
+            <tr>
+              <th className="p-3">ID</th>
+              <th className="p-3">Message</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {feedbacks.map((f) => (
+              <tr key={f.id} className="border-b">
+                <td className="p-3">{f.id}</td>
+                <td className="p-3">{f.message}</td>
               </tr>
-            </thead>
-            <tbody>
-              {feedbacks.map(f => (
-                <tr key={f.id} className="border-b last:border-none">
-                  <td className="p-3">{f.id}</td>
-                  <td className="p-3">{f.name}</td>
-                  <td className="p-3">{f.email}</td>
-                  <td className="p-3">{f.phone}</td>
-                  <td className="p-3">{f.message}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       )}
 
-      {/* Messages Table */}
-      {view === "messages" && contacts.length > 0 && (
-        <div className="overflow-x-auto mb-10">
-          <table className="w-full border-collapse bg-white rounded-xl shadow-md">
-            <thead className="bg-[#6D1B1C] text-white">
-              <tr>
-                <th className="p-3 text-left">ID</th>
-                <th className="p-3 text-left">Username</th>
-                <th className="p-3 text-left">Message</th>
+      {view === "messages" && messages.length > 0 && (
+        <table className="w-full bg-white rounded shadow">
+          <thead className="bg-[#6D1B1C] text-white">
+            <tr>
+              <th className="p-3">ID</th>
+              <th className="p-3">Username</th>
+              <th className="p-3">Page Path</th>
+              <th className="p-3">Message</th>
+              <th className="p-3">Date</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {messages.map((m) => (
+              <tr key={m.id} className="border-b">
+                <td className="p-3">{m.id}</td>
+                <td className="p-3">{m.userName}</td>
+                <td className="p-3">
+                  <a
+                    href={m.page_path}
+                    target="_blank"
+                    className="bg-[#6D1B1C] text-white px-3 py-1 rounded"
+                  >
+                     View Page
+                  </a>
+                </td>
+                <td className="p-3">{m.message}</td>
+                <td className="p-3">
+                  {new Date(m.created_at).toLocaleString()}
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {contacts.map(c => (
-                <tr key={c.id} className="border-b last:border-none">
-                  <td className="p-3">{c.id}</td>
-                  <td className="p-3">{c.userName}</td>
-                  <td className="p-3">{c.message}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       )}
 
-      {/* Add New Admin Form */}
-      <div className="max-w-md mx-auto bg-white p-6 rounded-xl shadow-md">
-        <h2 className="text-2xl font-bold mb-4 text-center text-[#6D1B1C]">Add New Admin</h2>
-        <form onSubmit={handleAddAdmin} className="space-y-4">
-          <input type="text" placeholder="Name" value={newAdminName} onChange={e => setNewAdminName(e.target.value)} className="w-full p-2 border border-gray-300 rounded" required />
-          <input type="email" placeholder="Email" value={newAdminEmail} onChange={e => setNewAdminEmail(e.target.value)} className="w-full p-2 border border-gray-300 rounded" required />
-          <input type="password" placeholder="Password" value={newAdminPassword} onChange={e => setNewAdminPassword(e.target.value)} className="w-full p-2 border border-gray-300 rounded" required />
-          <button type="submit" disabled={adding} className="w-full bg-[#6D1B1C] hover:bg-[#8B1F20] text-white font-semibold py-2 px-4 rounded">
+      {view === "contact" && contacts.length > 0 && (
+        <table className="w-full bg-white rounded shadow">
+          <thead className="bg-[#6D1B1C] text-white">
+            <tr>
+              <th className="p-3">ID</th>
+              <th className="p-3">Name</th>
+              <th className="p-3">Email</th>
+              <th className="p-3">Phone</th>
+              <th className="p-3">Message</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {contacts.map((c) => (
+              <tr key={c.id} className="border-b">
+                <td className="p-3">{c.id}</td>
+                <td className="p-3">{c.name}</td>
+                <td className="p-3">{c.email}</td>
+                <td className="p-3">{c.phone}</td>
+                <td className="p-3">{c.message}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+
+      {/* ADD NEW ADMIN */}
+      <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded shadow">
+        <h2 className="text-xl font-semibold mb-4 text-center">
+          Add New Admin
+        </h2>
+
+        <form onSubmit={handleAddAdmin} className="flex flex-col gap-3">
+          <input
+            type="text"
+            placeholder="Name"
+            value={newAdminName}
+            onChange={(e) => setNewAdminName(e.target.value)}
+            className="border p-2 rounded"
+            required
+          />
+
+          <input
+            type="email"
+            placeholder="Email"
+            value={newAdminEmail}
+            onChange={(e) => setNewAdminEmail(e.target.value)}
+            className="border p-2 rounded"
+            required
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            value={newAdminPassword}
+            onChange={(e) => setNewAdminPassword(e.target.value)}
+            className="border p-2 rounded"
+            required
+          />
+
+          <button
+            type="submit"
+            disabled={adding}
+            className="bg-[#6D1B1C] text-white py-2 rounded"
+          >
             {adding ? "Adding..." : "Add Admin"}
           </button>
-          {addMessage && <p className="text-center mt-2 text-green-600">{addMessage}</p>}
         </form>
+
+        {addMessage && (
+          <p className="text-center mt-3 text-green-600">{addMessage}</p>
+        )}
       </div>
     </div>
   );

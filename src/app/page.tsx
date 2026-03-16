@@ -82,12 +82,6 @@ export default function HomePage() {
               Rent
             </Link>
 
-            <Link 
-              href="/list_property" 
-              className="hover:underline"
-            >
-              Sell
-            </Link>
 
             <Link 
               href="/pre-approval" 
@@ -327,7 +321,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <PriceCalculator />
 
       {/* HERO SECTION */}
       <section
