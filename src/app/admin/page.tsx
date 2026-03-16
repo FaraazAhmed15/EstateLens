@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 interface User {
   id: number;
@@ -276,14 +277,13 @@ export default function AdminPage() {
                 <td className="p-3">{m.id}</td>
                 <td className="p-3">{m.userName}</td>
                 <td className="p-3">
-                  <a
-                    href={m.page_path}
-                    target="_blank"
-                    className="bg-[#6D1B1C] text-white px-3 py-1 rounded"
-                  >
-                     View Page
-                  </a>
-                </td>
+                <Link
+                  href={m.page_path}
+                  className="bg-[#6D1B1C] text-white px-3 py-1 rounded hover:bg-[#8B1F20]"
+                >
+                   View Page
+                </Link>
+              </td>
                 <td className="p-3">{m.message}</td>
                 <td className="p-3">
                   {new Date(m.created_at).toLocaleString()}
